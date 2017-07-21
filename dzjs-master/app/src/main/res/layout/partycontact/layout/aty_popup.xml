@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/item_popup_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="29dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/icon_popupwindow_bg"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_no_words"
+                android:layout_width="match_parent"
+                android:layout_height="18dp" />
+
+            <LinearLayout
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:paddingBottom="10dp"
+                android:layout_marginRight="9dp"
+                android:background="@drawable/item_popupwindow_bg">
+
+                <TextView
+                    android:id="@+id/tv_add"
+                    android:paddingLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingRight="20dp"
+                    android:text="新增查询" />
+
+                <ImageView
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="25dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_show_down" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/item_popup_year"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:paddingBottom="10dp"
+                android:layout_marginRight="9dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/item_popupwindow_bg">
+
+                <TextView
+                    android:id="@+id/tv_year"
+                    android:paddingLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingRight="20dp"
+                    android:text="  年度查询" />
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="25dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_show_down" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/item_popup_month"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:paddingTop="5dp"
+                android:background="@drawable/item_popupwindow_bg">
+
+                <TextView
+                    android:id="@+id/tv_moth"
+                    android:paddingLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingRight="20dp"
+                    android:text="  季度查询" />
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:id="@+id/img_month_icon"
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_show_down" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

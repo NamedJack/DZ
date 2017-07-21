@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wongxd.partymanage">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <intent-filter>
+        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+    </intent-filter>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- 元数据 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+            <!-- 配置中的authorities按照江湖规矩一般加上包名,${applicationId}是获取当前项目的包名， -->
+            <!-- 前提是defaultConfig｛｝闭包中要有applicationId属性。 -->
+            <!-- defaultConfig { -->
+            <!-- applicationId "com.chaychan.demo" -->
+            <!-- } -->
+        </provider>
+        <!--MQTT-->
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service android:name=".mqtt.service.MqttService" />
+
+        <activity
+            android:name=".TakeImgActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/transeparent" />
+        <activity
+            android:name=".AtyMainActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".LoginActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SlplashActivityTheme">
+
+        </activity>
+        <activity android:name=".home.aty.NewsDeatilActivity" />
+        <activity android:name=".party.aty.ThreeAndOneActivity" />
+        <activity
+            android:name=".party.threeAndOne.MeetingDetailActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".party.threeAndOne.StudyRecordActivity" />
+        <activity android:name=".party.threeAndOne.AddStudyRecordActivity" />
+        <activity android:name=".party.threeAndOne.MeetingRecordActivity" />
+        <activity android:name=".promise.aty.PromiseOfPartyActivity">
+
+        </activity>
+        <activity android:name=".peoplestalk.aty.PeoplesTlakAty">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".peoplestalk.aty.AddTlakPersionAty"></activity>
+        <activity android:name=".partycontact.aty.ContactOfPartyAty"></activity>
+        <activity
+            android:name=".partycontact.aty.PopupActivity"
+            android:theme="@style/MyAtyDialogStyle"></activity>
+        <activity android:name=".partycontact.aty.ContactDetailAty" />
+    </application>
+
+</manifest>

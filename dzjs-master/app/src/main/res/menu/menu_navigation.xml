@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/m_i_home"
+        android:checked="true"
+        android:icon="@drawable/home"
+        android:title="首页" />
+
+    <!--<item-->
+        <!--android:id="@+id/m_i_activity"-->
+        <!--android:icon="@drawable/activity"-->
+        <!--android:title="活动" />-->
+    <item
+        android:id="@+id/m_i_party"
+        android:icon="@drawable/party"
+        android:title="党务" />
+
+    <item
+        android:id="@+id/m_i_msg"
+        android:icon="@drawable/msg"
+        android:title="消息" />
+    <item
+        android:id="@+id/m_i_me"
+        android:icon="@drawable/me"
+        android:title="我的" />
+
+</menu>

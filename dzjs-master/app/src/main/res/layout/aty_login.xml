@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/divier"
+    android:orientation="vertical"
+    tools:context="com.wongxd.partymanage.LoginActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/app_red"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/username" />
+
+        <com.wongxd.partymanage.widget.PowerfulEditText
+            android:id="@+id/et_account"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:hint="请输入您的登录账号"
+            android:paddingLeft="15dp"
+            android:paddingRight="@dimen/dp_10"
+            android:textSize="14sp"
+            android:backgroundTint="@color/transparent"
+            app:funcType="canClear"
+            app:rightDrawableHeight="25dp"
+            app:rightDrawableWidth="25dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divier" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/pwd" />
+
+        <com.wongxd.partymanage.widget.PowerfulEditText
+            android:id="@+id/et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="请输入您的登录密码"
+            android:paddingLeft="15dp"
+            android:paddingRight="@dimen/dp_10"
+            android:textSize="14sp"
+            android:inputType="textPassword"
+            app:funcType="canWatchPwd"
+            app:rightDrawableHeight="25dp"
+            app:rightDrawableWidth="25dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/cb_remenber_pwd"
+            android:text="记住密码：" />
+
+        <CheckBox
+            app:theme="@style/cb_test"
+            android:id="@+id/cb_remenber_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:checked="true" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_shape"
+        android:stateListAnimator="@drawable/state_list_animator_z"
+        android:text="登录"
+        android:textColor="@color/white" />
+</LinearLayout>
