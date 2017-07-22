@@ -81,6 +81,9 @@
             android:name=".partycontact.aty.PopupActivity"
             android:theme="@style/MyAtyDialogStyle"></activity>
         <activity android:name=".partycontact.aty.ContactDetailAty" />
+        <activity android:name=".partycontact.aty.AddContactPersonAty"/>
+        <activity android:name=".payforparty.aty.PayForPartyDetailAty"/>
+        <activity android:name=".payforparty.aty.PayForPartyAty"/>
     </application>
 
 </manifest>

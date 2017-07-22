@@ -75,14 +75,14 @@
 
             <ImageView
                 android:id="@+id/iv_add"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="5dp"
-                android:layout_gravity="center"
-                android:tint="@color/app_red"
-                android:src="@drawable/add"
                 android:scaleType="centerInside"
-                android:layout_width="25dp"
-                android:layout_height="25dp" />
+                android:src="@drawable/add"
+                android:tint="@color/app_red" />
         </LinearLayout>
 
 

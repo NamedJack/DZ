@@ -38,7 +38,8 @@ android {
                             'src/main/res/layout/custom',
                             'src/main/res/layout/promise',
                             'src/main/res/layout/peoplestalk',
-                            'src/main/res/layout/partycontact'
+                            'src/main/res/layout/partycontact',
+                            'src/main/res/layout/payforparty'
                     ]
         }
     }

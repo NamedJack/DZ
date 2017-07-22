@@ -55,7 +55,7 @@ public class ContactPartyAdapter extends BaseAdapter {
         }
         holder.month.setText(partyList.get(position).getTime());
         holder.persion.setText("联系对象：" + partyList.get(position).getPerson());
-        holder.action.setText( partyList.get(position).getAction());
+        holder.action.setText( partyList.get(position).getHelpNotes());
         return convertView;
     }
 

@@ -6,7 +6,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/item_popup_add"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -22,6 +22,7 @@
                 android:layout_height="18dp" />
 
             <LinearLayout
+                android:id="@+id/item_popup_add"
                 android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:paddingRight="20dp"
-                    android:text="新增查询" />
+                    android:text="  新增记录" />
 
                 <ImageView
                     android:visibility="invisible"
@@ -72,6 +73,8 @@
                     android:text="  年度查询" />
 
                 <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/item_year_img"
                     android:layout_gravity="center"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -101,8 +104,9 @@
                     android:text="  季度查询" />
 
                 <ImageView
+                    android:visibility="invisible"
                     android:layout_weight="1"
-                    android:id="@+id/img_month_icon"
+                    android:id="@+id/item_month_img"
                     android:layout_gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="25dp"

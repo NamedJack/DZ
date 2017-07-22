@@ -1,6 +1,7 @@
 package com.wongxd.partymanage.partycontact.aty;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -33,6 +35,7 @@ public class PopupActivity extends Activity {
     private List<String> yearhList;
     private TextView tvAdd, tvMonth, tvYear;
     private int tvWidth;
+    private ImageView yearImg, monthImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class PopupActivity extends Activity {
         tvMonth = (TextView) findViewById(R.id.tv_moth);
         tvYear = (TextView) findViewById(R.id.tv_year);
         tvAdd = (TextView) findViewById(R.id.tv_add);
+        yearImg = (ImageView) findViewById(R.id.item_year_img);
+        monthImg = (ImageView) findViewById(R.id.item_month_img);
         itemAdd.setOnClickListener(clickListener);
         itemMonth.setOnClickListener(clickListener);
         itemYear.setOnClickListener(clickListener);
@@ -74,12 +79,17 @@ public class PopupActivity extends Activity {
 
         switch (v.getId()) {
             case R.id.item_popup_add:
+                Intent intent = new Intent(PopupActivity.this, AddContactPersonAty.class);
+                startActivity(intent);
+                PopupActivity.this.finish();
                 break;
             case R.id.item_popup_month:
                 initPopupWindow(tvMonth, 60, -30, monthList);
+                monthImg.setVisibility(View.VISIBLE);
                 break;
             case R.id.item_popup_year:
                 initPopupWindow(tvYear, 60, -20, yearhList);
+                yearImg.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
@@ -92,6 +102,7 @@ public class PopupActivity extends Activity {
         mWindow.setFocusable(true);
         mWindow.setOutsideTouchable(false);
         mWindow.setBackgroundDrawable(new ColorDrawable(0xffffff));//必须设置，否则bug
+        mWindow.setOnDismissListener(dismissListener);
         timeList = (ListView) contentView.findViewById(R.id.time_list);
         PopupAdapter adapter = new PopupAdapter(this, dataList);
         timeList.setAdapter(adapter);
@@ -100,6 +111,8 @@ public class PopupActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 parentView.setText(dataList.get(position));
+                yearImg.setVisibility(View.INVISIBLE);
+                monthImg.setVisibility(View.INVISIBLE);
                 mWindow.dismiss();
                 mWindow = null;
             }
@@ -122,4 +135,12 @@ public class PopupActivity extends Activity {
         });
 
     }
+    PopupWindow.OnDismissListener dismissListener = new PopupWindow.OnDismissListener() {
+        @Override
+        public void onDismiss() {
+            yearImg.setVisibility(View.INVISIBLE);
+            monthImg.setVisibility(View.INVISIBLE);
+            mWindow = null;
+        }
+    };
 }

@@ -62,9 +62,11 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(ContactOfPartyAty.this, ContactDetailAty.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable(partyList.get(position));
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("contactParty",partyList.get(position));
+            intent.putExtra("party",bundle);
             startActivity(intent);
         }
     };
+
 }

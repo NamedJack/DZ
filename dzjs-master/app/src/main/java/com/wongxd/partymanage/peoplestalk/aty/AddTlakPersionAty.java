@@ -1,13 +1,12 @@
 package com.wongxd.partymanage.peoplestalk.aty;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.DatePicker;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
 import com.wongxd.partymanage.databinding.AtyAddTlakpersionBinding;
@@ -19,7 +18,7 @@ import java.util.Calendar;
  * Created by zyj on 2017/7/19.
  */
 
-public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBinding> {
+public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBinding> implements DatePickerDialog.OnDateSetListener {
 //    final int DATE_DIALOG = 1;
     private int mYear, mMonth, mDay;
     private String persionPoltics;
@@ -51,8 +50,10 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
         bindingView.addTalkDays.setOnClickListener(v->{
             switch (v.getId()){
                 case R.id.add_talk_days:
-                    DatePickerDialog dialog = new DatePickerDialog(AddTlakPersionAty.this, dataListener, mYear, mMonth, mDay);
-                    dialog.show();
+//                    DatePickerDialog dialog = new DatePickerDialog(AddTlakPersionAty.this, dataListener, mYear, mMonth, mDay);
+//
+//                    dialog.show();
+                    showTimeChoose();
                     break;
                 default:
                     break;
@@ -62,12 +63,16 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
 
     }
 
+    private void showTimeChoose() {
+        DatePickerDialog dialog = DatePickerDialog.newInstance(
+                this, mYear, mMonth, mDay
+        );
+        dialog.show(getFragmentManager(), "Datepickerdialog");
+    }
+
     View.OnClickListener clickListener = v -> {
         switch (v.getId()){
             case R.id.tlak_left_icon:
-//                Intent intent1 = new Intent();
-//                intent1.putExtra("bundle","");
-//                setResult(1,intent1);
                 setResult(0,null);
                 AddTlakPersionAty.this.finish();
                 break;
@@ -90,15 +95,6 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
 
 
 
-    DatePickerDialog.OnDateSetListener dataListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            mYear = year;
-            mDay = dayOfMonth;
-            mMonth = month;
-            setTime(mYear, mMonth, mDay);
-        }
-    };
 
     private void setTime(int mYear, int mMonth, int mDay) {
         tlakTime = mYear+ "-" + mMonth  + "-" + mDay;
@@ -119,4 +115,11 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
     };
 
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        mYear = year;
+        mDay = dayOfMonth;
+        mMonth = monthOfYear;
+        setTime(mYear, mMonth, mDay);
+    }
 }

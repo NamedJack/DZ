@@ -40,7 +40,7 @@ public class MqttService extends Service {
     private String clintID = "dz" + preferences.getString("account",null) + Math.random()*100;
     private static final int QOS = 2;
     boolean retained = false;
-    String host = "tcp://192.168.100.220:61613";
+    String host = "tcp://192.168.181.152:61613";
     String mqttUserName = "admin";
     String mqttUserPwd = "password";
     String myTopic = "toclient/"+1;//

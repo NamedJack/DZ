@@ -2,6 +2,7 @@ package com.wongxd.partymanage.party.threeAndOne
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
@@ -64,6 +65,7 @@ class AddStudyRecordActivity : BaseKotlinActivity(), DatePickerDialog.OnDateSetL
      * base  id  query info
      */
     private fun getDetail() {
+        if (TextUtils.isEmpty(id)) return
         val url = UrlConf.StudyRecordDetailUrl
         WNetUtil.StringCallBack(OkHttpUtils.post().url(url).tag(netTag).addParams("id", id).addParams("token", App.token)
                 , url, this

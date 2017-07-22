@@ -9,14 +9,14 @@ import java.io.Serializable;
 public class ContactParty implements Serializable{
     private String person;
     private String time;
-    private String help;
+    private String helpNotes;
     private String action;
 
-    public ContactParty(String person, String time, String help, String action) {
+    public ContactParty(String person, String time, String helpNotes, String action) {
 
         this.person = person;
         this.time = time;
-        this.help = help;
+        this.helpNotes = helpNotes;
         this.action = action;
     }
 
@@ -36,12 +36,12 @@ public class ContactParty implements Serializable{
         this.time = time;
     }
 
-    public String getHelp() {
-        return help;
+    public String getHelpNotes() {
+        return helpNotes;
     }
 
-    public void setHelp(String help) {
-        this.help = help;
+    public void setHelpNotes(String helpNotes) {
+        this.helpNotes = helpNotes;
     }
 
     public String getAction() {

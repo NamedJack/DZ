@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -30,7 +29,6 @@ public class SplashActivity extends AppCompatActivity {
         iv.postDelayed(() -> {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(App.instance);
             String token = preferences.getString("token", null);
-            Log.e("token",token);
             if (TextUtils.isEmpty(token)) {
                 startActivity(new Intent(this, LoginActivity.class));
             } else {
