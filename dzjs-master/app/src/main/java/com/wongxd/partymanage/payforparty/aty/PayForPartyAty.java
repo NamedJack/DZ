@@ -3,6 +3,9 @@ package com.wongxd.partymanage.payforparty.aty;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +14,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import com.wongxd.partymanage.App;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
 import com.wongxd.partymanage.databinding.AtyPayforPartyBinding;
 import com.wongxd.partymanage.partycontact.adapter.PopupAdapter;
 import com.wongxd.partymanage.payforparty.adapter.PayMoneyAdapter;
 import com.wongxd.partymanage.payforparty.bean.MoneyOfParty;
+import com.wongxd.partymanage.utils.conf.UrlConf;
+import com.wongxd.partymanage.utils.net.WNetUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by zyj on 2017/7/22.
@@ -31,34 +44,87 @@ public class PayForPartyAty extends BaseBindingActivity<AtyPayforPartyBinding> {
     private ListView time;
     private List<String> yearList;
     private ImageView rightImg;
+
+    private PayMoneyAdapter adapter;
+
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle bundle = msg.getData();
+            if (bundle != null) {
+                String response = bundle.getString("data");
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String resultCode = jsonObject.getString("code");
+                    if(resultCode.equals("100")){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            String payable = jsonArray.getJSONObject(i).getString("payable");
+                            String paid = jsonArray.getJSONObject(i).getString("paid");
+                            String time = jsonArray.getJSONObject(i).getString("time");
+                            String payTime = jsonArray.getJSONObject(i).getString("payTime");
+                            int state = jsonArray.getJSONObject(i).getInt("state");
+                            String address = jsonArray.getJSONObject(i).getString("address");
+                            MoneyOfParty moneyOfParty = new MoneyOfParty(payable, paid, state, payTime, time, address);
+                            payList.add(moneyOfParty);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            super.handleMessage(msg);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_payfor_party);
-        initData();
+        initYearList();
         initView();
+        initData("");
+
     }
 
-    private void initData() {
-        for (int i = 0; i < 10; i++) {
-            MoneyOfParty moneyOfParty = new MoneyOfParty("500", "200", "一月", "2017.01", true, "北三环西路48号北京科技会展");
-            payList.add(moneyOfParty);
-        }
-        payList.add(new MoneyOfParty("500", "200", "十一月", "2017.01", false ,"北三环西路48号北京科技会展" ));
-        payList.add(new MoneyOfParty("300", "200", "十二月", "2017.01", false, "北三环西路48号北京科技会展"));
+    private void initYearList() {
         yearList = new ArrayList<>();
-        for (int i = 10; i < 20; i++) {
+        for (int i = 10; i < 18; i++) {
             yearList.add("20" + i);
         }
+    }
+
+    private void initData(String searchTime) {
+        String url = UrlConf.PayForPartyUrl;
+        WNetUtil.StringCallBack(OkHttpUtils.post().url(url)
+                        .addParams("token", App.token)
+                        .addParams("time", searchTime)
+                , url, PayForPartyAty.this, "数据获取中", true, new WNetUtil.WNetStringCallback() {
+                    @Override
+                    public void success(String response, int id) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("data", response);
+                            Message message = new Message();
+                            message.setData(bundle);
+                            handler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void error(Call call, Exception e, int id) {
+                        Log.e("msg", "网络错误" + e.toString());
+                    }
+                });
     }
 
     private void initView() {
         bindingView.payforLeftIcon.setOnClickListener(clickListener);
         bindingView.payforRightIcon.setOnClickListener(clickListener);
-        PayMoneyAdapter adapter = new PayMoneyAdapter(payList, this);
+        rightImg = (ImageView) findViewById(R.id.payfor_right_img);
+        adapter = new PayMoneyAdapter(payList, this);
         bindingView.payForList.setAdapter(adapter);
         bindingView.payForList.setOnItemClickListener(itemClickListener);
-        rightImg = (ImageView) findViewById(R.id.payfor_right_img);
     }
 
     View.OnClickListener clickListener = v -> {
@@ -75,8 +141,9 @@ public class PayForPartyAty extends BaseBindingActivity<AtyPayforPartyBinding> {
     };
 
     private void showYearChooseWindow() {
-        initPopupWindow(rightImg, -100 ,0 ,yearList);
+        initPopupWindow(rightImg, -100, 0, yearList);
     }
+
     private void initPopupWindow(View parentView, int widthOff, int heightOff, List<String> dataList) {
         View contentView = LayoutInflater.from(this).inflate(R.layout.contact_popupwindow, null, false);
         mWindow = new PopupWindow(contentView, 150, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -93,6 +160,8 @@ public class PayForPartyAty extends BaseBindingActivity<AtyPayforPartyBinding> {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                parentView.setText(dataList.get(position));
+                payList.clear();
+                initData(dataList.get(position));
                 mWindow.dismiss();
                 mWindow = null;
             }
@@ -103,9 +172,9 @@ public class PayForPartyAty extends BaseBindingActivity<AtyPayforPartyBinding> {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(PayForPartyAty.this, PayForPartyDetailAty.class);
-            MoneyOfParty moneyOfParty = new MoneyOfParty(payList.get(position).getTotalMoney(),
-                    payList.get(position).getPaidMoney(), payList.get(position).getMonth(),
-                    payList.get(position).getDay(), payList.get(position).isHavePaid(),
+            MoneyOfParty moneyOfParty = new MoneyOfParty(payList.get(position).getPayable(),
+                    payList.get(position).getPaid(), payList.get(position).getState(),
+                    payList.get(position).getPayTime(), payList.get(position).getTime(),
                     payList.get(position).getAddress());
 
             Bundle bundle = new Bundle();
@@ -114,4 +183,6 @@ public class PayForPartyAty extends BaseBindingActivity<AtyPayforPartyBinding> {
             startActivity(intent);
         }
     };
+
+
 }

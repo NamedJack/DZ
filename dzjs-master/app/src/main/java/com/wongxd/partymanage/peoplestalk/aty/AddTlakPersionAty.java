@@ -2,7 +2,6 @@ package com.wongxd.partymanage.peoplestalk.aty;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -105,7 +104,6 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             persionPoltics = (String) bindingView.addPersionPoltics.getSelectedItem();
-            Log.e("msg",persionPoltics);
         }
 
         @Override

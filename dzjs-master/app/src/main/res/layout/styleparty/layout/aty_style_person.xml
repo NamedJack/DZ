@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/person_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/app_red"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/style_person_left_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/return_img"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="党员风采"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/tlak_right_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:clickable="true"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/add"
+                    android:tint="@color/white"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/person_top_space"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/person_top" />
+
+
+        <LinearLayout
+            android:id="@+id/person_head_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/person_top_space"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/person_left_icon" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@color/black" />
+
+            <com.wongxd.partymanage.styleParty.view.RectImageView
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/test_rect_image">
+
+            </com.wongxd.partymanage.styleParty.view.RectImageView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:background="@color/black" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/person_left_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/person_head_img">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:src="@drawable/person_letf_flower" />
+
+            <TextView
+                android:id="@+id/style_person_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="张小珊"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/bottom_icom"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="15dp"
+            android:src="@drawable/person_letf_flower" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottom_icom"
+            android:layout_below="@id/ll_1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="30dp"
+                android:src="@drawable/person_text_left_img" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="25dp"
+                android:paddingRight="5dp"
+                android:text="222222222222222222"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

@@ -7,61 +7,132 @@ import java.io.Serializable;
  */
 
 public class MoneyOfParty implements Serializable {
-    private String totalMoney;
-    private String paidMoney;
-    private String month;
-    private String day;
+
+    /**
+     * id : 101
+     * number : BH00002
+     * name : bbb
+     * payable : 11.5
+     * paid : 11.5
+     * payState : 2
+     * time : 2017-06
+     * payTime : 2017-06-03
+     * state : 3
+     * unitname : 第一党支部
+     * unitid : 1
+     * address : xx
+     * timeid : null
+     */
+
+    private int id;
+    private String number;
+    private String name;
+    private String payable;
+    private String paid;
+    private int payState;
+    private String time;
+    private String payTime;
+    private int state;
+    private String unitname;
+    private int unitid;
     private String address;
-    private boolean havePaid;
+    private String timeid;
 
-
-    public MoneyOfParty(String totalMoney, String paidMoney, String month, String day, boolean havePaid, String address) {
-        this.totalMoney = totalMoney;
-        this.paidMoney = paidMoney;
-        this.month = month;
-        this.day = day;
-        this.havePaid = havePaid;
+    public MoneyOfParty(String payable, String paid, int state, String payTime, String time, String address) {
+        this.payable = payable;
+        this.paid = paid;
+        this.state = state;
+        this.time = time;
         this.address = address;
+        this.payTime = payTime;
     }
 
-    public String getTotalMoney() {
-        return totalMoney;
+    public int getId() {
+        return id;
     }
 
-    public void setTotalMoney(String totalMoney) {
-        this.totalMoney = totalMoney;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPaidMoney() {
-        return paidMoney;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPaidMoney(String paidMoney) {
-        this.paidMoney = paidMoney;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getMonth() {
-        return month;
+    public String getName() {
+        return name;
     }
 
-    public void setMonth(String month) {
-        this.month = month;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDay() {
-        return day;
+    public String getPayable() {
+        return payable;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setPayable(String payable) {
+        this.payable = payable;
     }
 
-    public boolean isHavePaid() {
-        return havePaid;
+    public String getPaid() {
+        return paid;
     }
 
-    public void setHavePaid(boolean havePaid) {
-        this.havePaid = havePaid;
+    public void setPaid(String paid) {
+        this.paid = paid;
+    }
+
+    public int getPayState() {
+        return payState;
+    }
+
+    public void setPayState(int payState) {
+        this.payState = payState;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(String payTime) {
+        this.payTime = payTime;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getUnitname() {
+        return unitname;
+    }
+
+    public void setUnitname(String unitname) {
+        this.unitname = unitname;
+    }
+
+    public int getUnitid() {
+        return unitid;
+    }
+
+    public void setUnitid(int unitid) {
+        this.unitid = unitid;
     }
 
     public String getAddress() {
@@ -72,14 +143,11 @@ public class MoneyOfParty implements Serializable {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "MoneyOfParty{" +
-                "totalMoney='" + totalMoney + '\'' +
-                ", paidMoney='" + paidMoney + '\'' +
-                ", month='" + month + '\'' +
-                ", day='" + day + '\'' +
-                ", havePaid=" + havePaid +
-                '}';
+    public String getTimeid() {
+        return timeid;
+    }
+
+    public void setTimeid(String timeid) {
+        this.timeid = timeid;
     }
 }

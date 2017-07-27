@@ -27,8 +27,12 @@ import com.wongxd.partymanage.databinding.FgtPartyBinding;
 import com.wongxd.partymanage.party.aty.ThreeAndOneActivity;
 import com.wongxd.partymanage.party.bean.PartyBean;
 import com.wongxd.partymanage.party.bean.PartySectionBean;
-import com.wongxd.partymanage.promise.aty.PromiseOfPartyActivity;
 import com.wongxd.partymanage.party.threeAndOne.StudyRecordActivity;
+import com.wongxd.partymanage.partycontact.aty.ContactOfPartyAty;
+import com.wongxd.partymanage.payforparty.aty.PayForPartyAty;
+import com.wongxd.partymanage.peoplestalk.aty.PeoplesTlakAty;
+import com.wongxd.partymanage.promise.aty.PromiseOfPartyActivity;
+import com.wongxd.partymanage.styleParty.aty.StyleOfPartyAty;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -174,8 +178,18 @@ public class PartyFragment extends BaseBindingFragment<FgtPartyBinding> {
             case "党员承诺":
                 intent = new Intent(getActivity(), PromiseOfPartyActivity.class);
                 break;
-//            case "明主评论谈心":
-//                break;
+            case "民主评议谈心":
+                intent = new Intent(getActivity(), PeoplesTlakAty.class);
+                break;
+            case "党费":
+                intent = new Intent(getActivity(), PayForPartyAty.class);
+                break;
+            case "群众联系表":
+                intent = new Intent(getActivity(), ContactOfPartyAty.class);
+                break;
+            case "党员风采":
+                intent = new Intent(getActivity(), StyleOfPartyAty.class);
+                break;
         }
 
         if (null != intent)

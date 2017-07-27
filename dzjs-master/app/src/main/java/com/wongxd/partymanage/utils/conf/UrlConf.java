@@ -6,9 +6,9 @@ package com.wongxd.partymanage.utils.conf;
 
 public class UrlConf {
 
-//    public static String HOST = "http://116.62.181.152:8555/";
+    public static String HOST = "http://116.62.181.152:8555/";
 
-    public static String HOST = "http://192.168.100.220:8080/";
+//    public static String HOST = "http://192.168.100.220:8080/";
 
 
     public static String LoginUrl = HOST + "userLogin";//登录
@@ -57,4 +57,15 @@ public class UrlConf {
     public static String StudyRecordDetailUrl = HOST + "user/experience";
 
 
+    /**
+     * 党费
+     * :http://localhost:8080/user/costinfo
+     */
+    public static String PayForPartyUrl = HOST + "user/costlist";
+    /**
+     * 党员承诺
+     */
+    public static String PromiseOfParty = HOST + "user/promiselist";
+    public static String PersonPromise = HOST + "user/subpromise";
+    public static String AddPersonPromise = HOST + "user/promiseuserinfo";
 }

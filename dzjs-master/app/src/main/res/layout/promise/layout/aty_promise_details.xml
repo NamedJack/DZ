@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/view_top_title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/app_red"
             android:orientation="horizontal">
 
             <LinearLayout
-
+                android:id="@+id/person_promise_back_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -41,96 +42,181 @@
                 android:textSize="18sp" />
 
             <LinearLayout
-
+                android:id="@+id/person_message_cancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:clickable="true"
-                android:visibility="invisible">
+                android:visibility="visible">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                <TextView
+                    android:textColor="@color/white"
+                    android:text="取消"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
                     android:scaleType="centerInside"
                     android:src="@drawable/return_img"
                     android:tint="@color/white" />
             </LinearLayout>
         </LinearLayout>
 
+
         <LinearLayout
+            android:layout_below="@id/view_top_title"
+            android:id="@+id/person_message"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/promise_party_name"
-                android:text="姓名"
-                android:paddingTop="@dimen/dp_10"
-                android:textSize="20sp"
-                android:paddingLeft="20dp"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/promise_party_department"
-                android:paddingTop="@dimen/dp_10"
-                android:paddingBottom="@dimen/dp_10"
-                android:text="党支部"
-                android:textSize="18sp"
-                android:paddingLeft="20dp"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:paddingLeft="@dimen/dp_10"
+                    android:id="@+id/promise_party_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:text="zhangsan"
+                    android:textSize="20sp" />
+
+                <Spinner
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:id="@+id/year_sp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:entries="@array/yeararr">
+
+                </Spinner>
+            </LinearLayout>
+
+            <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="40dp">
+
+                <TextView
+                    android:id="@+id/promise_party_department"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:text="zhibu"
+                    android:textSize="@dimen/sp_16"
+                    android:paddingLeft="10dp"/>
+
+                <TextView
+                    android:visibility="invisible"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/bg_save_btn"
+                    android:id="@+id/person_message_commit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center"
+                    android:text="保存"
+                    android:textSize="16sp"
+                    android:textColor="@color/app_red"
+                    android:clickable="true">
+
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
+        <ScrollView
+
+            android:background="@color/lightgray"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:orientation="vertical">
-            <TextView
-                android:layout_marginLeft="20dp"
-                android:textSize="18sp"
-                android:text="学习目标:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/promise_study"
+            android:layout_height="match_parent"
+            android:layout_below="@id/person_message"
+            android:fillViewport="true">
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:orientation="vertical">
-            <TextView
-                android:layout_marginLeft="20dp"
-                android:textSize="18sp"
-                android:text="工作目标:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/promise_work"
-                android:layout_margin="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+                <TextView
+                    android:id="@+id/person_study"
+                    android:text="学习目标"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"/>
+                <EditText
+                    android:id="@+id/person_study_et"
+                    android:layout_marginLeft="15dp"
+                    android:padding="3dp"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <TextView
+                    android:id="@+id/person_work"
+                    android:text="工作目标"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"/>
+                <EditText
+                    android:id="@+id/person_work_et"
+                    android:layout_marginLeft="15dp"
+                    android:padding="3dp"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <TextView
+                    android:id="@+id/person_style"
+                    android:text="作风形象目标"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"/>
+                <EditText
+                    android:id="@+id/person_style_et"
+                    android:layout_marginLeft="15dp"
+                    android:padding="3dp"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <TextView
+                    android:id="@+id/person_contact"
+                    android:text="联系群众工作目标"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"/>
+                <EditText
+                    android:id="@+id/person_contact_et"
+                    android:layout_marginLeft="15dp"
+                    android:padding="3dp"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <TextView
+                    android:id="@+id/person_play"
+                    android:text="参加党组织活动目标"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"/>
+                <EditText
+                    android:id="@+id/person_play_et"
+                    android:layout_marginLeft="15dp"
+                    android:padding="3dp"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+        </ScrollView>
 
-            <Button
-                android:text="保存"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/cycle_corners"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

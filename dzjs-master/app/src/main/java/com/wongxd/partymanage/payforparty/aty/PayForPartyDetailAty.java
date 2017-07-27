@@ -18,31 +18,26 @@ public class PayForPartyDetailAty extends BaseBindingActivity<AtyPayforPartyDeta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_payfor_party_detail);
-        initData();
         initView();
     }
 
-    private void initData() {
-//        Intent intent = getIntent();
-//        Bundle bundle = intent.getExtras();
-//        MoneyOfParty moneyOfParty = (MoneyOfParty) bundle.getSerializable("pay");
-    }
 
     private void initView() {
         bindingView.payLeftIcon.setOnClickListener(clickListener);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         MoneyOfParty moneyOfParty = (MoneyOfParty) bundle.getSerializable("pay");
-        bindingView.tvPayOfMonth.setText(moneyOfParty.getMonth() + "党费");
-        bindingView.tvPayHowMuchTop.setText(moneyOfParty.getTotalMoney() + "元");
-        bindingView.tvPayHowMuchDown.setText(moneyOfParty.getPaidMoney()+ "元");
-        bindingView.payMoneyAddress.setText( "缴费地点："+ moneyOfParty.getAddress());
+        bindingView.tvPayOfMonth.setText(moneyOfParty.getTime().split("-")[1] + "月党费");
+        bindingView.tvPayHowMuchTop.setText(moneyOfParty.getPayable() + "元");
+        bindingView.tvPayHowMuchDown.setText(moneyOfParty.getPaid() + "元");
+        bindingView.payMoneyAddress.setText("缴费地点：" + moneyOfParty.getAddress());
     }
+
     View.OnClickListener clickListener = v -> {
-      switch (v.getId()){
-          case R.id.pay_left_icon:
-              PayForPartyDetailAty.this.finish();
-              break;
-      }
+        switch (v.getId()) {
+            case R.id.pay_left_icon:
+                PayForPartyDetailAty.this.finish();
+                break;
+        }
     };
 }

@@ -8,7 +8,6 @@ import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
 import com.wongxd.partymanage.databinding.AtyContactDetailBinding;
 import com.wongxd.partymanage.partycontact.bean.ContactParty;
-import com.wongxd.partymanage.payforparty.aty.PayForPartyAty;
 
 /**
  * Created by zyj on 2017/7/21.
@@ -45,8 +44,8 @@ public class ContactDetailAty extends BaseBindingActivity<AtyContactDetailBindin
               ContactDetailAty.this.finish();
               break;
           case R.id.detail_right_icon:
-              Intent intent = new Intent(ContactDetailAty.this, PayForPartyAty.class);
-              startActivity(intent);
+//              Intent intent = new Intent(ContactDetailAty.this, PayForPartyAty.class);
+//              startActivity(intent);
               break;
           default:
               break;

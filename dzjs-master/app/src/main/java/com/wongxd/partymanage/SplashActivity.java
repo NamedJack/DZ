@@ -29,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
         iv.postDelayed(() -> {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(App.instance);
             String token = preferences.getString("token", null);
+
             if (TextUtils.isEmpty(token)) {
                 startActivity(new Intent(this, LoginActivity.class));
             } else {

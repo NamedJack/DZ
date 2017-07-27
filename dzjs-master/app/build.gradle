@@ -39,7 +39,8 @@ android {
                             'src/main/res/layout/promise',
                             'src/main/res/layout/peoplestalk',
                             'src/main/res/layout/partycontact',
-                            'src/main/res/layout/payforparty'
+                            'src/main/res/layout/payforparty',
+                            'src/main/res/layout/styleparty'
                     ]
         }
     }
@@ -89,6 +90,7 @@ android {
 //    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
 //    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
         //    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+
     }
     repositories {
         maven {

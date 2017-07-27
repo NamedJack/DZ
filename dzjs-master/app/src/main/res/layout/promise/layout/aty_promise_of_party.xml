@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -60,23 +60,53 @@
         </LinearLayout>
 
         <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp"
+            android:background="@color/lightgray">
 
-            <include layout="@layout/item_promise_recycle_headview">
+            <com.wongxd.partymanage.promise.view.SearchEditTextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/promise_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:gravity="center"
+                android:hint="搜索"
+                android:paddingLeft="25dp"
+                android:imeOptions="actionSearch"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                />
 
-            </include>
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/promise_add"
+                android:paddingRight="10dp"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/add"
+                android:tint="@color/app_red" />
         </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rl_promise"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/promise_srl"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rl_promise"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 </layout>

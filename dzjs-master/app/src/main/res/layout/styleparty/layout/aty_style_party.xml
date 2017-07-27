@@ -13,7 +13,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/people_tlak_left_icon"
+                android:id="@+id/style_left_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -36,56 +36,56 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="民主谈心"
+                android:text="党员风采"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <LinearLayout
-                android:visibility="visible"
                 android:id="@+id/tlak_right_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:clickable="true">
+                android:clickable="true"
+                android:visibility="visible">
 
                 <ImageView
-
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/add"
-                    android:tint="@color/white" />
+                    android:tint="@color/white"
+                    android:visibility="invisible" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:background="#fff"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
             <EditText
-                android:drawableRight="@drawable/search_img_red"
                 android:id="@+id/people_tlak_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#fff"
+                android:background="@null"
+                android:drawableRight="@drawable/search_img_red"
                 android:gravity="center"
                 android:hint="搜索"
                 android:imeOptions="actionSearch"
                 android:inputType="textCapWords"
-                android:paddingLeft="12dp"
-                android:paddingRight="8dp"
-                android:singleLine="true" />
+                android:maxLines="1" />
         </LinearLayout>
-        <ListView
-            android:id="@+id/people_lv"
-            android:divider="@null"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/style_rl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:dividerHeight="0dp">
 
-        </ListView>
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-
 </layout>

@@ -55,7 +55,11 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SlplashActivityTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".home.aty.NewsDeatilActivity" />
         <activity android:name=".party.aty.ThreeAndOneActivity" />
@@ -65,25 +69,20 @@
         <activity android:name=".party.threeAndOne.StudyRecordActivity" />
         <activity android:name=".party.threeAndOne.AddStudyRecordActivity" />
         <activity android:name=".party.threeAndOne.MeetingRecordActivity" />
-        <activity android:name=".promise.aty.PromiseOfPartyActivity">
-
-        </activity>
-        <activity android:name=".peoplestalk.aty.PeoplesTlakAty">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".promise.aty.PromiseOfPartyActivity"></activity>
+        <activity android:name=".promise.aty.PromiseDetailActivity"></activity>
+        <activity android:name=".peoplestalk.aty.PeoplesTlakAty"></activity>
         <activity android:name=".peoplestalk.aty.AddTlakPersionAty"></activity>
         <activity android:name=".partycontact.aty.ContactOfPartyAty"></activity>
         <activity
             android:name=".partycontact.aty.PopupActivity"
             android:theme="@style/MyAtyDialogStyle"></activity>
         <activity android:name=".partycontact.aty.ContactDetailAty" />
-        <activity android:name=".partycontact.aty.AddContactPersonAty"/>
-        <activity android:name=".payforparty.aty.PayForPartyDetailAty"/>
-        <activity android:name=".payforparty.aty.PayForPartyAty"/>
+        <activity android:name=".partycontact.aty.AddContactPersonAty" />
+        <activity android:name=".payforparty.aty.PayForPartyDetailAty" />
+        <activity android:name=".payforparty.aty.PayForPartyAty"></activity>
+        <activity android:name=".styleParty.aty.StyleOfPartyAty"></activity>
+        <activity android:name=".styleParty.aty.PersonStyleAty" />
     </application>
 
 </manifest>

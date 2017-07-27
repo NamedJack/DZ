@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
 import com.wongxd.partymanage.databinding.AtyPeoplestalkBinding;
-import com.wongxd.partymanage.partycontact.aty.ContactOfPartyAty;
 import com.wongxd.partymanage.peoplestalk.adapter.PeopleTalkAdapter;
 import com.wongxd.partymanage.peoplestalk.bean.PeopleTalk;
 
@@ -32,7 +31,7 @@ public class PeoplesTlakAty extends BaseBindingActivity<AtyPeoplestalkBinding> {
     }
 
     private void setListener() {
-        bindingView.tlakLeftIcon.setOnClickListener(clickListener);
+        bindingView.peopleTlakLeftIcon.setOnClickListener(clickListener);
         bindingView.tlakRightIcon.setOnClickListener(clickListener);
     }
 
@@ -47,8 +46,8 @@ public class PeoplesTlakAty extends BaseBindingActivity<AtyPeoplestalkBinding> {
         bindingView.peopleLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(PeoplesTlakAty.this, ContactOfPartyAty.class);
-                startActivity(intent);
+//                Intent intent = new Intent(PeoplesTlakAty.this, ContactOfPartyAty.class);
+//                startActivity(intent);
             }
         });
     }
@@ -56,7 +55,7 @@ public class PeoplesTlakAty extends BaseBindingActivity<AtyPeoplestalkBinding> {
     View.OnClickListener clickListener = v -> {
 
         switch (v.getId()) {
-            case R.id.tlak_left_icon:
+            case R.id.people_tlak_left_icon:
                 PeoplesTlakAty.this.finish();
                 break;
             case R.id.tlak_right_icon:

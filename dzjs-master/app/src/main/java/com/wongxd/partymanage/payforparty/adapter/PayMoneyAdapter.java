@@ -1,6 +1,7 @@
 package com.wongxd.partymanage.payforparty.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,12 +57,15 @@ public class PayMoneyAdapter extends BaseAdapter {
         } else {
             holder = (MyViewHolder) convertView.getTag();
         }
-        holder.month.setText(moneyList.get(position).getMonth() + "党费缴纳");
-        holder.day.setText(moneyList.get(position).getDay());
-        holder.totalMoney.setText(moneyList.get(position).getTotalMoney() + "  (元)");
-        holder.paidMoney.setText(moneyList.get(position).getPaidMoney()+ "  (元)");
-        if(moneyList.get(position).isHavePaid()){
+        holder.month.setText(moneyList.get(position).getTime().split("-")[1] + "月党费缴纳");
+        holder.day.setText(moneyList.get(position).getTime());
+        holder.totalMoney.setText(moneyList.get(position).getPayable() + "  (元)");
+        holder.paidMoney.setText(moneyList.get(position).getPaid()+ "  (元)");
+        Log.e("msg","缴费状态" + moneyList.get(position).getState());
+        if(2 == moneyList.get(position).getState() || 3 == moneyList.get(position).getState()){
             holder.isPaid.setImageResource(R.drawable.icon_monry_paid_img);
+        }else if( 1 == moneyList.get(position).getState()){
+            holder.isPaid.setImageResource(R.drawable.icon_monry_not_pay_img);
         }
         return convertView;
     }
