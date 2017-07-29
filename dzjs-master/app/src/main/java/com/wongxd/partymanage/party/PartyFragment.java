@@ -24,11 +24,13 @@ import com.wongxd.partymanage.base.rx.RxEventCodeType;
 import com.wongxd.partymanage.base.rx.Subscribe;
 import com.wongxd.partymanage.base.rx.ThreadMode;
 import com.wongxd.partymanage.databinding.FgtPartyBinding;
+import com.wongxd.partymanage.doBetter.aty.DoBetterAty;
 import com.wongxd.partymanage.party.aty.ThreeAndOneActivity;
 import com.wongxd.partymanage.party.bean.PartyBean;
 import com.wongxd.partymanage.party.bean.PartySectionBean;
 import com.wongxd.partymanage.party.threeAndOne.StudyRecordActivity;
 import com.wongxd.partymanage.partycontact.aty.ContactOfPartyAty;
+import com.wongxd.partymanage.partyvote.aty.PartyVoteRlAty;
 import com.wongxd.partymanage.payforparty.aty.PayForPartyAty;
 import com.wongxd.partymanage.peoplestalk.aty.PeoplesTlakAty;
 import com.wongxd.partymanage.promise.aty.PromiseOfPartyActivity;
@@ -189,6 +191,16 @@ public class PartyFragment extends BaseBindingFragment<FgtPartyBinding> {
                 break;
             case "党员风采":
                 intent = new Intent(getActivity(), StyleOfPartyAty.class);
+                break;
+            case "创先争优":
+                intent = new Intent(getActivity(), DoBetterAty.class);
+                break;
+            case "投票":
+                intent = new Intent(getActivity(), PartyVoteRlAty.class);
+                break;
+            case "支部架构":
+                break;
+            case "党员发展":
                 break;
         }
 

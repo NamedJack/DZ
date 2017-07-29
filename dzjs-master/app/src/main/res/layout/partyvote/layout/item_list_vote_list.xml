@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/vote_title"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="十大法治事件评选活动"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/vote_list_icon"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/icon_defualt"
+        android:layout_below="@id/vote_title"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:id="@+id/vote_start_person"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:text="发起人：张小三"
+        android:paddingLeft="15dp"
+        android:layout_below="@id/vote_title"
+        android:layout_toRightOf="@id/vote_list_icon"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <TextView
+        android:id="@+id/vote_last_time"
+        android:textColor="@color/app_red"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:padding="15dp"
+        android:text="截止：2017.06.8 12：00"
+        android:layout_below="@+id/vote_start_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

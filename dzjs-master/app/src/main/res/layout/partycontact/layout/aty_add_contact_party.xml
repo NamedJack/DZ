@@ -89,7 +89,7 @@
                        android:layout_height="match_parent"
                        android:layout_weight="2.5"
                        android:gravity="center"
-                       android:text="记录时间" />
+                       android:text="联系时间" />
 
                    <TextView
                        android:id="@+id/add_contact_days"

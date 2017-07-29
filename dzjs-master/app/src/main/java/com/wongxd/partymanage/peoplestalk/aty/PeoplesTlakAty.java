@@ -33,6 +33,7 @@ public class PeoplesTlakAty extends BaseBindingActivity<AtyPeoplestalkBinding> {
     private void setListener() {
         bindingView.peopleTlakLeftIcon.setOnClickListener(clickListener);
         bindingView.tlakRightIcon.setOnClickListener(clickListener);
+        bindingView.bottomNotes.setSelected(true);
     }
 
     private void initData() {

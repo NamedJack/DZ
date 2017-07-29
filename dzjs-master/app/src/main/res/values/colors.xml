@@ -192,5 +192,7 @@
     <color name="txt_black">#252525</color>
     <color name="txt_hint">#e7e7e7</color><!--黑色 -->
     <color name="pay_bg">#D8B75A</color>
+    <color name="colourless">#00FFFFFF</color> <!--透明-->
+    <color name="bottom_bg">#98435d6c</color><!--投票下面票数栏背景-->
 
 </resources>

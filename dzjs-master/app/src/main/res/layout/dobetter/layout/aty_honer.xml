@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/app_red"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/honer_left_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/return_img"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/honer_view_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="创先争优"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:clickable="true"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/add"
+                    android:tint="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/honer_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="无憾人生"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/honer_tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/honer_tv_title"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:text="2017-05-15"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/honer_tv_belong"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/honer_tv_title"
+                    android:layout_toRightOf="@id/honer_tv_time"
+                    android:text="集体荣誉"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/honer_test_src" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/honer_tv_story"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:padding="10dp">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

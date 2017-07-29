@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/vote_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/app_red"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/party_vote_left_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/return_img"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/party_vote_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="投票"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/contact_right_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:clickable="true"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_contact_right"
+                    android:tint="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_below="@id/vote_top"
+            android:id="@+id/vote_img"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/party_of_vote_img" />
+
+        <LinearLayout
+            android:id="@+id/time_last_ll"
+            android:layout_below="@id/vote_img"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/time_over"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/deepskyblue"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="投票倒计时"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <cn.iwgang.countdownview.CountdownView
+                android:id="@+id/vote_spare_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2"
+                android:background="@color/deepskyblue"
+                android:padding="10dp"
+                app:isHideTimeBackground="false"
+                app:isShowDay="true"
+                app:isShowHour="true"
+                app:isShowMillisecond="false"
+                app:isShowMinute="true"
+                app:isShowSecond="true"
+                app:isShowTimeBgBorder="true"
+                app:isTimeTextBold="true"
+                app:suffixDay="天"
+                app:suffixGravity="center"
+                app:suffixHour="时"
+                app:suffixLRMargin="5dp"
+                app:suffixMinute="分"
+                app:suffixSecond="秒"
+                app:suffixTextColor="#ffffff"
+                app:suffixTextSize="17sp"
+                app:timeBgBorderColor="#E8E8E8"
+                app:timeBgBorderRadius="3dp"
+                app:timeBgBorderSize="2dp"
+                app:timeBgColor="@color/deepskyblue"
+                app:timeBgDivisionLineSize="1dp"
+                app:timeBgRadius="3dp"
+                app:timeBgSize="30dp"
+                app:timeTextColor="#ffffff"
+                app:timeTextSize="17sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/vote_list_notes"
+            android:layout_below="@+id/time_last_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="评选列表"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/party_vote_rl"
+            android:layout_below="@+id/vote_list_notes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:id="@+id/bottom_ll"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <TextView
+                android:id="@+id/tv_colourless"
+                android:background="@color/colourless"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <TextView
+                android:background="@color/bottom_bg"
+                android:id="@+id/play_rules"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/deepskyblue"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="活动规则"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="16sp"/>
+            <LinearLayout
+                android:id="@+id/center_question"
+                android:background="@color/bottom_bg"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/play_rules"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp">
+                <TextView
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:background="@drawable/question_icon"
+                    android:text="\?"
+                    android:textColor="@color/deepskyblue"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:background="@color/bottom_bg"
+                android:layout_toRightOf="@id/center_question"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <LinearLayout
+                android:id="@+id/vote_ticket_bg"
+                android:background="@drawable/vote_no_ticket"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:orientation="vertical">
+                <TextView
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="我要投票"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <TextView
+                    android:textColor="@color/white"
+                    android:id="@+id/tickets_of_total"
+                    android:textSize="18sp"
+                    android:gravity="center_horizontal"
+                    android:text="0/10"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

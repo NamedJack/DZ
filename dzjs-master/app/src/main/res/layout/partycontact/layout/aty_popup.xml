@@ -32,6 +32,7 @@
                 android:background="@drawable/item_popupwindow_bg">
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/tv_add"
                     android:paddingLeft="10dp"
                     android:layout_width="0dp"
@@ -63,6 +64,7 @@
                 android:background="@drawable/item_popupwindow_bg">
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/tv_year"
                     android:paddingLeft="10dp"
                     android:layout_width="0dp"
@@ -94,6 +96,7 @@
                 android:background="@drawable/item_popupwindow_bg">
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/tv_moth"
                     android:paddingLeft="10dp"
                     android:layout_width="0dp"

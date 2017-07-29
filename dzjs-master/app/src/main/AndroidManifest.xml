@@ -38,7 +38,7 @@
             <!-- applicationId "com.chaychan.demo" -->
             <!-- } -->
         </provider>
-        <!--MQTT-->
+        <!-- MQTT -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name=".mqtt.service.MqttService" />
 
@@ -69,20 +69,24 @@
         <activity android:name=".party.threeAndOne.StudyRecordActivity" />
         <activity android:name=".party.threeAndOne.AddStudyRecordActivity" />
         <activity android:name=".party.threeAndOne.MeetingRecordActivity" />
-        <activity android:name=".promise.aty.PromiseOfPartyActivity"></activity>
-        <activity android:name=".promise.aty.PromiseDetailActivity"></activity>
-        <activity android:name=".peoplestalk.aty.PeoplesTlakAty"></activity>
-        <activity android:name=".peoplestalk.aty.AddTlakPersionAty"></activity>
-        <activity android:name=".partycontact.aty.ContactOfPartyAty"></activity>
+        <activity android:name=".promise.aty.PromiseOfPartyActivity" />
+        <activity android:name=".promise.aty.PromiseDetailActivity" />
+        <activity android:name=".peoplestalk.aty.PeoplesTlakAty" />
+        <activity android:name=".peoplestalk.aty.AddTlakPersionAty" />
+        <activity android:name=".partycontact.aty.ContactOfPartyAty" />
         <activity
             android:name=".partycontact.aty.PopupActivity"
-            android:theme="@style/MyAtyDialogStyle"></activity>
+            android:theme="@style/MyAtyDialogStyle" />
         <activity android:name=".partycontact.aty.ContactDetailAty" />
         <activity android:name=".partycontact.aty.AddContactPersonAty" />
         <activity android:name=".payforparty.aty.PayForPartyDetailAty" />
-        <activity android:name=".payforparty.aty.PayForPartyAty"></activity>
-        <activity android:name=".styleParty.aty.StyleOfPartyAty"></activity>
+        <activity android:name=".payforparty.aty.PayForPartyAty" />
+        <activity android:name=".styleParty.aty.StyleOfPartyAty" />
         <activity android:name=".styleParty.aty.PersonStyleAty" />
+        <activity android:name=".partyvote.aty.PartyVoteAty"></activity>
+        <activity android:name=".doBetter.aty.DoBetterAty"></activity>
+        <activity android:name=".doBetter.aty.HonerAty"></activity>
+        <activity android:name=".partyvote.aty.PartyVoteRlAty"></activity>
     </application>
 
 </manifest>

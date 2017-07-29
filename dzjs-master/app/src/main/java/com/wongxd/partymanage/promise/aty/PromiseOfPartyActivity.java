@@ -61,7 +61,7 @@ public class PromiseOfPartyActivity extends BaseBindingActivity<AtyPromiseOfPart
                 , url, PromiseOfPartyActivity.this, "数据获取中", true, new WNetUtil.WNetStringCallback() {
                     @Override
                     public void success(String response, int id) {
-                        Log.e("msg", "搜索返回" + response);
+//                        Log.e("msg", "搜索返回" + response);
                         PromiseBean promiseBean = new Gson().fromJson(response, PromiseBean.class);
                         if (promiseBean.getCode() == 100) {
                             dataBeenList.addAll(promiseBean.getData());
