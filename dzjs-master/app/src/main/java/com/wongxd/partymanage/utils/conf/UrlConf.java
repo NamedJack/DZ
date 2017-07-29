@@ -75,5 +75,11 @@ public class UrlConf {
     public static String PartyVoteTicket = HOST + "votefront/listVote";
     public static String PartyVoteTicketTitle = HOST + "votefront/getOption";
 
+    /**
+     * 民主谈心
+     */
+    public static String PeopleTlak = HOST + "user/conversationList";
+    public static String AddPeopleTlak = HOST + "user/subConversation";
+
 
 }

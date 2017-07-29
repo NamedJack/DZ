@@ -2,6 +2,7 @@ package com.wongxd.partymanage.partyvote.aty;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.wongxd.partymanage.base.BaseBindingActivity;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyRecyclerViewAdapter;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyVoteListBinding;
+import com.wongxd.partymanage.partyvote.RecyclerViewDivider;
 import com.wongxd.partymanage.partyvote.bean.VoteListBean;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
@@ -84,6 +86,8 @@ public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
         };
         bindingView.voteListRl.setLayoutManager(new LinearLayoutManager(this));
         bindingView.voteListRl.setAdapter(myRecyclerViewAdapter);
+        bindingView.voteListRl.addItemDecoration(new RecyclerViewDivider(
+                this, LinearLayoutManager.HORIZONTAL, 1, ContextCompat.getColor(this, R.color.lightgray)));
         myRecyclerViewAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, int position) {

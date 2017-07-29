@@ -4,8 +4,11 @@
 
         <item>党员</item>
         <item>预备党员</item>
-        <item>团员</item>
+        <item>党员发展对象</item>
+        <item>入党积极分子</item>
+        <item>共青团员</item>
         <item>群众</item>
+        <item>其他</item>
     </string-array>
 
 

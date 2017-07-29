@@ -16,6 +16,7 @@ import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyVoteOfPartyBinding;
 import com.wongxd.partymanage.partyvote.RecyclerViewDivider;
 import com.wongxd.partymanage.partyvote.bean.VoteBean;
+import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -36,6 +37,7 @@ public class PartyVoteAty extends BaseBindingActivity<AtyVoteOfPartyBinding> {
     private MyRecyclerViewAdapter myAdapter;
     private List<VoteBean.DataBean> voteBeanList = new ArrayList<>();
     private int vote = 0;
+    private long spareTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class PartyVoteAty extends BaseBindingActivity<AtyVoteOfPartyBinding> {
             e.printStackTrace();
         }
 
-        long spareTime = endtTime.getTime() - startTime.getTime();
+        spareTime = endtTime.getTime() - startTime.getTime();
         Log.e("msg", "spareTime" + spareTime);
         bindingView.voteSpareTime.start(spareTime);
         bindingView.partyVoteLeftIcon.setOnClickListener(onClickListener);
@@ -103,27 +105,34 @@ public class PartyVoteAty extends BaseBindingActivity<AtyVoteOfPartyBinding> {
                 holder.setOnClickListener(R.id.vote_play_do_choose, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!voteBeanList.get(position).isSelected()) {
-                            voteBeanList.get(position).setSelected(true);
-                            holder.setBackgroundRes(R.id.vote_play_do_choose, R.drawable.btn_down);
-                            holder.setText(R.id.vote_play_do_choose, "取 消");
+                        if (spareTime > 0) {
+
+                            if (!voteBeanList.get(position).isSelected()) {
+                                voteBeanList.get(position).setSelected(true);
+                                holder.setBackgroundRes(R.id.vote_play_do_choose, R.drawable.btn_down);
+                                holder.setText(R.id.vote_play_do_choose, "取 消");
 //                            TU.cT("选择" + voteBeanList.get(position).getName());
-                             vote++;
-                        }else {
-                            voteBeanList.get(position).setSelected(false);
-                            holder.setBackgroundRes(R.id.vote_play_do_choose, R.drawable.btn_nomal);
-                            holder.setText(R.id.vote_play_do_choose, "选TA");
+                                vote++;
+                            } else {
+                                voteBeanList.get(position).setSelected(false);
+                                holder.setBackgroundRes(R.id.vote_play_do_choose, R.drawable.btn_nomal);
+                                holder.setText(R.id.vote_play_do_choose, "选TA");
 //                            TU.cT("取消选择" + voteBeanList.get(position).getName());
-                            vote--;
+                                vote--;
+                            }
+                            bindingView.ticketsOfTotal.setText(vote + "/" + voteBeanList.size());
+                            if (vote > 0) {
+                                bindingView.voteTicketBg.setBackground(getResources().getDrawable(R.drawable.vote_have_ticket));
+                            } else {
+                                bindingView.voteTicketBg.setBackground(getResources().getDrawable(R.drawable.vote_no_ticket));
+                            }
+                        } else {
+                            TU.cT("当前活动投票已结束，请查看其他投票活动");
                         }
-                        bindingView.ticketsOfTotal.setText(vote + "/" + voteBeanList.size());
-                        if(vote > 0){
-                            bindingView.voteTicketBg.setBackground(getResources().getDrawable(R.drawable.vote_have_ticket));
-                        }else {
-                            bindingView.voteTicketBg.setBackground(getResources().getDrawable(R.drawable.vote_no_ticket));
-                        }
+
                     }
                 });
+
             }
         };
         bindingView.partyVoteRl.setAdapter(myAdapter);

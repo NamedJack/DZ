@@ -57,11 +57,11 @@ public class PeopleTalkAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tlakTime.setText(talkList.get(position).getTlakTime());
-        holder.persionPoltics.setText("政治面貌：" + talkList.get(position).getPersionPoltics());
-        holder.tlakPersion.setText("谈心对象：" + talkList.get(position).getTlakPersion());
-        holder.selfPersion.setText("自我认识及措施：" + talkList.get(position).getSelfPersion());
-        holder.advicePersion.setText("意见和建议：" + talkList.get(position).getAdvicePersion());
+//        holder.tlakTime.setText(talkList.get(position).getTlakTime());
+//        holder.persionPoltics.setText("政治面貌：" + talkList.get(position).getPersionPoltics());
+//        holder.tlakPersion.setText("谈心对象：" + talkList.get(position).getTlakPersion());
+//        holder.selfPersion.setText("自我认识及措施：" + talkList.get(position).getSelfPersion());
+//        holder.advicePersion.setText("意见和建议：" + talkList.get(position).getAdvicePersion());
 //        holder.tlakYears.setText(talkList.get(position).getTlakYears());
 
         return convertView;
