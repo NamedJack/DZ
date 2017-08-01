@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:orientation="vertical">
+
         <LinearLayout
-            android:id="@+id/top_view"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/app_red"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/do_better_left_icon"
+                android:id="@+id/structure_left_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -32,12 +31,12 @@
 
 
             <TextView
-                android:id="@+id/do_better_title"
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="创先争优"
+                android:text="组织架构"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -50,38 +49,20 @@
                 android:visibility="invisible">
 
                 <ImageView
-
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/add"
+                    android:src="@drawable/return_img"
                     android:tint="@color/white" />
             </LinearLayout>
         </LinearLayout>
-
-
-        <com.wongxd.partymanage.promise.view.SearchEditTextView
-            android:id="@+id/do_better_search"
+        <ImageView
+            android:id="@+id/structure_img"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/top_view"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:gravity="center"
-            android:hint="搜索"
-            android:imeOptions="actionSearch"
-            android:inputType="textCapWords"
-            android:paddingLeft="25dp"
-            android:paddingRight="8dp"
-            android:maxLines="1" />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/do_better_rl"
-            android:layout_below="@id/do_better_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
-        </android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
 </layout>

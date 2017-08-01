@@ -60,11 +60,13 @@ public class PayMoneyAdapter extends BaseAdapter {
         holder.month.setText(moneyList.get(position).getTime().split("-")[1] + "月党费缴纳");
         holder.day.setText(moneyList.get(position).getTime());
         holder.totalMoney.setText(moneyList.get(position).getPayable() + "  (元)");
-        holder.paidMoney.setText(moneyList.get(position).getPaid()+ "  (元)");
+
         Log.e("msg","缴费状态" + moneyList.get(position).getState());
         if(2 == moneyList.get(position).getState() || 3 == moneyList.get(position).getState()){
+            holder.paidMoney.setText(moneyList.get(position).getPaid()+ "  (元)");
             holder.isPaid.setImageResource(R.drawable.icon_monry_paid_img);
         }else if( 1 == moneyList.get(position).getState()){
+            holder.paidMoney.setText(moneyList.get(position).getPaid()+ " 0 (元)");
             holder.isPaid.setImageResource(R.drawable.icon_monry_not_pay_img);
         }
         return convertView;

@@ -16,6 +16,7 @@ import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyVoteOfPartyBinding;
 import com.wongxd.partymanage.partyvote.RecyclerViewDivider;
 import com.wongxd.partymanage.partyvote.bean.VoteBean;
+import com.wongxd.partymanage.utils.SystemBarHelper;
 import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
@@ -43,6 +44,7 @@ public class PartyVoteAty extends BaseBindingActivity<AtyVoteOfPartyBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_vote_of_party);
+        SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initData();
     }
 

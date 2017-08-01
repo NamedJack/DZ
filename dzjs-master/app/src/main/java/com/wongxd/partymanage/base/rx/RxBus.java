@@ -156,6 +156,7 @@ public class RxBus {
      * @param subscriber 订阅者
      */
     public void register(Object subscriber) {
+
         Class<?> subClass = subscriber.getClass();
         Method[] methods = subClass.getDeclaredMethods();
         for (Method method : methods) {

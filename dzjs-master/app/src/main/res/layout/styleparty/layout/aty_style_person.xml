@@ -91,6 +91,7 @@
                 android:background="@color/black" />
 
             <com.wongxd.partymanage.styleParty.view.RectImageView
+                android:id="@+id/person_photo"
                 android:layout_width="100dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
@@ -163,6 +164,7 @@
                 android:src="@drawable/person_text_left_img" />
 
             <TextView
+                android:id="@+id/person_describe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="25dp"

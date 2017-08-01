@@ -3,6 +3,7 @@ package com.wongxd.partymanage.peoplestalk.aty;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,6 +20,7 @@ import com.wongxd.partymanage.base.RecyclerAdapter.MyRecyclerViewAdapter;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyPeoplestalkBinding;
 import com.wongxd.partymanage.peoplestalk.bean.PeopleTalk;
+import com.wongxd.partymanage.utils.SystemBarHelper;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -40,6 +42,7 @@ public class PeoplesTlakAty extends BaseBindingActivity<AtyPeoplestalkBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_peoplestalk);
+        SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initView();
 
     }
@@ -108,7 +111,7 @@ public class PeoplesTlakAty extends BaseBindingActivity<AtyPeoplestalkBinding> {
                 , url, PeoplesTlakAty.this, "数据获取中", true, new WNetUtil.WNetStringCallback() {
                     @Override
                     public void success(String response, int id) {
-                        Log.e("msg","谈心返回 " + response);
+//                        Log.e("msg","谈心返回 " + response);
                         PeopleTalk peopleTalk = null;
                         try {
                             peopleTalk = new Gson().fromJson(response, PeopleTalk.class);
@@ -128,9 +131,6 @@ public class PeoplesTlakAty extends BaseBindingActivity<AtyPeoplestalkBinding> {
 
                     }
                 });
-
-
-
     }
 
     View.OnClickListener clickListener = v -> {

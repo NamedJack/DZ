@@ -226,7 +226,7 @@ public class HomeFragment extends Fragment {
                 .addParams("pageSize", "10");
         String searchName = bindingView.etSearch.getText().toString().trim();
         if (!TextUtils.isEmpty(searchName)) {
-            builder.addParams("name", searchName);
+            builder.addParams("name", searchName + "");
         } else {
             builder.addParams("pageNo", pageNo + "");
         }

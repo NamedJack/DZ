@@ -74,7 +74,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="无憾人生"
                     android:textSize="25sp" />
 
                 <TextView
@@ -84,7 +83,6 @@
                     android:layout_below="@id/honer_tv_title"
                     android:paddingLeft="10dp"
                     android:paddingRight="20dp"
-                    android:text="2017-05-15"
                     android:textSize="18sp" />
 
                 <TextView
@@ -93,7 +91,6 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/honer_tv_title"
                     android:layout_toRightOf="@id/honer_tv_time"
-                    android:text="集体荣誉"
                     android:textSize="18sp" />
             </RelativeLayout>
 
@@ -103,21 +100,30 @@
                 android:layout_weight="1.5">
 
                 <ImageView
+                    android:id="@+id/team_honer_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/honer_test_src" />
+                    android:scaleType="centerCrop"/>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/honer_tv_story"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
+                android:fillViewport="true"
                 android:padding="10dp">
-            </TextView>
+
+                <TextView
+                    android:id="@+id/honer_tv_story"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </TextView>
+            </ScrollView>
+
+
         </LinearLayout>
     </LinearLayout>
 </layout>

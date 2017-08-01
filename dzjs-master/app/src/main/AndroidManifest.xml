@@ -87,6 +87,7 @@
         <activity android:name=".doBetter.aty.DoBetterAty"></activity>
         <activity android:name=".doBetter.aty.HonerAty"></activity>
         <activity android:name=".partyvote.aty.PartyVoteRlAty"></activity>
+        <activity android:name=".structure.aty.StructureAty"></activity>
     </application>
 
 </manifest>

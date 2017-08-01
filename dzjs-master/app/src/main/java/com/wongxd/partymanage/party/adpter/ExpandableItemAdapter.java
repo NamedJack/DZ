@@ -10,7 +10,6 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.rx.RxBus;
 import com.wongxd.partymanage.base.rx.RxEventCodeType;
-import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 
 import java.util.List;
@@ -63,7 +62,6 @@ public class ExpandableItemAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        TU.cT("lv1 点击了 " + lv1.item.getName());
                         RxBus.getDefault().post(RxEventCodeType.PARTY_GOTO, lv1.item.getName());
                     }
                 });

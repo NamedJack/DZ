@@ -29,11 +29,12 @@ public class SplashActivity extends AppCompatActivity {
         iv.postDelayed(() -> {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(App.instance);
             String token = preferences.getString("token", null);
-
-            if (TextUtils.isEmpty(token)) {
+            String appId = preferences.getString("appid", null);
+            if (TextUtils.isEmpty(token) || TextUtils.isEmpty(appId) ) {
                 startActivity(new Intent(this, LoginActivity.class));
             } else {
                 App.token = token;
+                App.id = appId;
                 startActivity(new Intent(this, AtyMainActivity.class));
             }
             overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);

@@ -38,22 +38,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/list_action"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:gravity="center_vertical"
                 android:text="互相帮助措施记录:"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/list_action"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:textSize="14sp" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,7 +78,7 @@
         android:background="@drawable/icon_contact_blue"
         android:gravity="center_vertical"
         android:paddingBottom="5dp"
-        android:paddingLeft="@dimen/dp_10"
+        android:paddingLeft="8dp"
         android:text="第一季度"
         android:textSize="16sp" />
 

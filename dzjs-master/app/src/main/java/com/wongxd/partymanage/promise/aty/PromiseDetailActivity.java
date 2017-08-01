@@ -2,6 +2,7 @@ package com.wongxd.partymanage.promise.aty;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -11,6 +12,7 @@ import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
 import com.wongxd.partymanage.databinding.AtyPromiseDetailsBinding;
 import com.wongxd.partymanage.promise.bean.PromiseBean;
+import com.wongxd.partymanage.utils.SystemBarHelper;
 import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
@@ -33,6 +35,7 @@ public class PromiseDetailActivity extends BaseBindingActivity<AtyPromiseDetails
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_promise_details);
+        SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initView();
         doNetRequst();
     }

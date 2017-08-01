@@ -17,6 +17,8 @@ import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyVoteListBinding;
 import com.wongxd.partymanage.partyvote.RecyclerViewDivider;
 import com.wongxd.partymanage.partyvote.bean.VoteListBean;
+import com.wongxd.partymanage.utils.SystemBarHelper;
+import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -37,6 +39,7 @@ public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_vote_list);
+        SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initData();
         initView();
     }
@@ -51,11 +54,14 @@ public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
 //                        Log.e("msg", "投票liebiao" + response);
                         VoteListBean voteListBean = new Gson().fromJson(response, VoteListBean.class);
                         if (voteListBean.getCode().equals(100+"")) {
-                            Log.e("msg",voteListBean.getData().size() + "aa");
-                            list.addAll(voteListBean.getData());
+//                            Log.e("msg",voteListBean.getData().size() + "aa");
+                            if(voteListBean.getData().size() == 0){
+                                TU.cT("暂无投票数据");
+                            }else {
+                                list.addAll(voteListBean.getData());
+                                myRecyclerViewAdapter.notifyDataSetChanged();
+                            }
                         }
-                        myRecyclerViewAdapter.notifyDataSetChanged();
-
                     }
 
                     @Override

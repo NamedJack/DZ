@@ -242,7 +242,7 @@
                     android:background="@color/trantracent">
 
                     <Button
-                        android:id="@+id/tlak_commit"
+                        android:id="@+id/add_tlak_commit"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dip"

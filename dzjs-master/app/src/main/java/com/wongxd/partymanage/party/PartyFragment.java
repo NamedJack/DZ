@@ -34,6 +34,7 @@ import com.wongxd.partymanage.partyvote.aty.PartyVoteRlAty;
 import com.wongxd.partymanage.payforparty.aty.PayForPartyAty;
 import com.wongxd.partymanage.peoplestalk.aty.PeoplesTlakAty;
 import com.wongxd.partymanage.promise.aty.PromiseOfPartyActivity;
+import com.wongxd.partymanage.structure.aty.StructureAty;
 import com.wongxd.partymanage.styleParty.aty.StyleOfPartyAty;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
@@ -52,16 +53,17 @@ public class PartyFragment extends BaseBindingFragment<FgtPartyBinding> {
 
     private WGridLayoutManager manager;
 
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onStart() {
+        super.onStart();
         RxBus.getDefault().register(this);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onStop() {
         RxBus.getDefault().unRegister(this);
+        super.onStop();
     }
 
     @Override
@@ -199,6 +201,7 @@ public class PartyFragment extends BaseBindingFragment<FgtPartyBinding> {
                 intent = new Intent(getActivity(), PartyVoteRlAty.class);
                 break;
             case "支部架构":
+                intent = new Intent(getActivity(), StructureAty.class);
                 break;
             case "党员发展":
                 break;
@@ -247,8 +250,7 @@ public class PartyFragment extends BaseBindingFragment<FgtPartyBinding> {
                 public void onClick(View v) {
                     if (bean.getName().equals("更多")) {
                         List<PartySectionBean> list = getData();
-                        for (PartySectionBean ite :
-                                list) {
+                        for (PartySectionBean ite : list) {
                             ite.isMoreClicked = !ite.isMoreClicked;
                         }
                         manager.setScrollEnabled(list.get(0).isMoreClicked);
@@ -287,4 +289,6 @@ public class PartyFragment extends BaseBindingFragment<FgtPartyBinding> {
             return isScrollEnabled && super.canScrollVertically();
         }
     }
+
+
 }

@@ -50,6 +50,8 @@ public class BaseBindingActivity<SV extends ViewDataBinding> extends AppCompatAc
         netCheckReceive = new CheckNetReceive();
         this.registerReceiver(netCheckReceive, filter);
 
+
+
     }
 
     @Override
@@ -75,11 +77,6 @@ public class BaseBindingActivity<SV extends ViewDataBinding> extends AppCompatAc
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        if (!isNoNet) mBaseBinding.tvNoNet.setVisibility(View.GONE);
-    }
 
     /***
      * 检查网络状态的广播

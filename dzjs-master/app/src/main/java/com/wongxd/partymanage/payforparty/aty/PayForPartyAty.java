@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.wongxd.partymanage.databinding.AtyPayforPartyBinding;
 import com.wongxd.partymanage.partycontact.adapter.PopupAdapter;
 import com.wongxd.partymanage.payforparty.adapter.PayMoneyAdapter;
 import com.wongxd.partymanage.payforparty.bean.MoneyOfParty;
+import com.wongxd.partymanage.utils.SystemBarHelper;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -83,6 +85,7 @@ public class PayForPartyAty extends BaseBindingActivity<AtyPayforPartyBinding> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_payfor_party);
+        SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initYearList();
         initView();
         initData("");

@@ -68,7 +68,7 @@
             android:focusableInTouchMode="true">
 
             <EditText
-                android:id="@+id/people_tlak_search"
+                android:id="@+id/style_party_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

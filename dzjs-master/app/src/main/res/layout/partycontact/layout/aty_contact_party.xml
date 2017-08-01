@@ -59,12 +59,10 @@
                     android:tint="@color/white" />
             </LinearLayout>
         </LinearLayout>
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/contact_list"
-            android:divider="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-        </ListView>
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </layout>

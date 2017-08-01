@@ -81,5 +81,27 @@ public class UrlConf {
     public static String PeopleTlak = HOST + "user/conversationList";
     public static String AddPeopleTlak = HOST + "user/subConversation";
 
+    /**
+     * 风采
+     */
+    public static String StyleParty = HOST + "user/mienList";
 
+
+    /**
+     * 创先争优
+     */
+    public static String DoBetter = HOST + "user/goodList";
+    public static String PersonImg = HOST +"user/goodDetailed";
+
+    /**
+     * 支部架构
+     */
+    public static String Getstructure = HOST + "user/getstructure";
+
+    /**
+     * 党员群众联系表
+     */
+    public static String PeopleContact = HOST + "user/contactList";
+    public static String PeopleContactDetail = HOST + "user/selectContactById";
+    public static String AddPeopleContact = HOST + "user/subContact";
 }

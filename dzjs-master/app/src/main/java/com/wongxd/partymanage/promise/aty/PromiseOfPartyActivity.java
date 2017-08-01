@@ -3,6 +3,7 @@ package com.wongxd.partymanage.promise.aty;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.wongxd.partymanage.base.RecyclerAdapter.MyRecyclerViewAdapter;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyPromiseOfPartyBinding;
 import com.wongxd.partymanage.promise.bean.PromiseBean;
+import com.wongxd.partymanage.utils.SystemBarHelper;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -39,6 +41,7 @@ public class PromiseOfPartyActivity extends BaseBindingActivity<AtyPromiseOfPart
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_promise_of_party);
+        SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initview();
     }
 

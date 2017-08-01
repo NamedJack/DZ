@@ -1,6 +1,7 @@
 package com.wongxd.partymanage.peoplestalk.aty;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,7 @@ import com.wongxd.partymanage.App;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
 import com.wongxd.partymanage.databinding.AtyAddTlakpersionBinding;
+import com.wongxd.partymanage.utils.SystemBarHelper;
 import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
@@ -27,10 +29,10 @@ import okhttp3.Call;
  */
 
 public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBinding> implements DatePickerDialog.OnDateSetListener {
-//    final int DATE_DIALOG = 1;
+    //    final int DATE_DIALOG = 1;
     private int mYear, mMonth, mDay;
     private String persionPoltics;
-    private String tlakTime;
+    private String tlakTime ;
     private String tlakAdvice;
     private String tlakSelf;
     private String tlakPersion;
@@ -39,14 +41,15 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_add_tlakpersion);
+        SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initData();
         setListener();
 
     }
 
-    private void commitData(String time, String target, String politics, String proposal, String autognosis ) {
+    private void commitData(String time, String target, String politics, String proposal, String autognosis) {
         String url = UrlConf.AddPeopleTlak;
-        Log.e("msg","数据提交 " + time + target +politics + proposal +autognosis);
+//        Log.e("msg", "数据提交 " + time + target + politics + proposal + autognosis);
         WNetUtil.StringCallBack(OkHttpUtils.post().url(url)
                         .addParams("token", App.token)
                         .addParams("time", time + "")
@@ -61,18 +64,12 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
-                            if("100".equals(code)){
+                            if ("100".equals(code)) {
                                 TU.cT("添加成功");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-//                        Log.e("msg","添加谈心返回 " + response);
-//                        PeopleTalk peopleTalk = new Gson().fromJson(response, PeopleTalk.class);
-//                        if(peopleTalk.getCode().equals( 100 + "")){
-//                            talkList.addAll(peopleTalk.getData().getConversationList());
-//                        }
-//                        talkAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -84,7 +81,7 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
     }
 
     private void setListener() {
-        bindingView.tlakCommit.setOnClickListener(clickListener);
+        bindingView.addTlakCommit.setOnClickListener(clickListener);
         bindingView.addPersionPoltics.setOnItemSelectedListener(itemClickListener);
         bindingView.tlakLeftIcon.setOnClickListener(clickListener);
     }
@@ -95,8 +92,8 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
         mMonth = ca.get(Calendar.MONTH);
         mDay = ca.get(Calendar.DAY_OF_MONTH);
 
-        bindingView.addTalkDays.setOnClickListener(v->{
-            switch (v.getId()){
+        bindingView.addTalkDays.setOnClickListener(v -> {
+            switch (v.getId()) {
                 case R.id.add_talk_days:
 //                    DatePickerDialog dialog = new DatePickerDialog(AddTlakPersionAty.this, dataListener, mYear, mMonth, mDay);
 //
@@ -119,17 +116,22 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
     }
 
     View.OnClickListener clickListener = v -> {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tlak_left_icon:
 //                setResult(0,null);
                 AddTlakPersionAty.this.finish();
                 break;
-            case R.id.tlak_commit:
+            case R.id.add_tlak_commit:
                 tlakPersion = bindingView.addPersionName.getText().toString();
                 tlakAdvice = bindingView.addPersionAdvice.getText().toString();
                 tlakSelf = bindingView.addPersionSlef.getText().toString();
-                commitData(tlakTime, tlakPersion, persionPoltics, tlakAdvice, tlakSelf);
-                AddTlakPersionAty.this.finish();
+                Log.e("msg","time" + tlakTime);
+                if (tlakTime == null ||tlakPersion.equals("") || tlakAdvice.equals("") || tlakSelf.equals("") ) {
+                    TU.cT("请填写完整信息");
+                } else {
+                    commitData(tlakTime, tlakPersion, persionPoltics, tlakAdvice, tlakSelf);
+                    AddTlakPersionAty.this.finish();
+                }
                 break;
             default:
                 break;
@@ -137,29 +139,27 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
     };
 
 
-
-
     private void setTime(int mYear, int mMonth, int mDay) {
-        tlakTime = mYear+ "-" + mMonth  + "-" + mDay;
-        bindingView.addTalkDays.setText(mYear+ "-" + ++mMonth  + "-" + mDay );
+        tlakTime = mYear + "-" + mMonth + "-" + mDay;
+        bindingView.addTalkDays.setText(mYear + "-" + ++mMonth + "-" + mDay);
     }
 
     AdapterView.OnItemSelectedListener itemClickListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if(bindingView.addPersionPoltics.getSelectedItem().equals("党员")){
+            if (bindingView.addPersionPoltics.getSelectedItem().equals("党员")) {
                 persionPoltics = 1 + "";
-            }else if(bindingView.addPersionPoltics.getSelectedItem().equals("预备党员")){
+            } else if (bindingView.addPersionPoltics.getSelectedItem().equals("预备党员")) {
                 persionPoltics = 2 + "";
-            }else if(bindingView.addPersionPoltics.getSelectedItem().equals("党员发展对象")){
+            } else if (bindingView.addPersionPoltics.getSelectedItem().equals("党员发展对象")) {
                 persionPoltics = 3 + "";
-            }else if(bindingView.addPersionPoltics.getSelectedItem().equals("入党积极分子")){
+            } else if (bindingView.addPersionPoltics.getSelectedItem().equals("入党积极分子")) {
                 persionPoltics = 4 + "";
-            }else if(bindingView.addPersionPoltics.getSelectedItem().equals("共青团员")){
+            } else if (bindingView.addPersionPoltics.getSelectedItem().equals("共青团员")) {
                 persionPoltics = 5 + "";
-            }else if(bindingView.addPersionPoltics.getSelectedItem().equals("群众")){
+            } else if (bindingView.addPersionPoltics.getSelectedItem().equals("群众")) {
                 persionPoltics = 6 + "";
-            }else if(bindingView.addPersionPoltics.getSelectedItem().equals("其他")){
+            } else if (bindingView.addPersionPoltics.getSelectedItem().equals("其他")) {
                 persionPoltics = 7 + "";
             }
 //            persionPoltics = (String) bindingView.addPersionPoltics.getSelectedItem();
@@ -179,10 +179,6 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
         mMonth = monthOfYear;
         setTime(mYear, mMonth, mDay);
     }
-
-
-
-
 
 
 }
