@@ -122,30 +122,6 @@ public class PopupActivity extends Activity {
         }
     };
 
-//    private void initYearWindow(TextView parentView, int widthOff, int heightOff, List<String> dataList){
-//        View contentView = LayoutInflater.from(this).inflate(R.layout.contact_popupwindow, null, false);
-//        mWindow = new PopupWindow(contentView, tvWidth - 15, LayoutParams.WRAP_CONTENT, true);
-//        mWindow.setFocusable(true);
-//        mWindow.setOutsideTouchable(false);
-//        mWindow.setBackgroundDrawable(new ColorDrawable(0xffffff));//必须设置，否则bug
-//        mWindow.showAsDropDown(parentView, widthOff, heightOff);
-//        mWindow.setOnDismissListener(dismissListener);
-//        timeList = (ListView) contentView.findViewById(R.id.time_list);
-//        PopupAdapter adapter = new PopupAdapter(this, dataList);
-//        timeList.setAdapter(adapter);
-//        timeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                tvMonth.setText(dataList.get(position));
-////                postgotInfo(dataList.get(position).toString());
-//                yearImg.setVisibility(View.INVISIBLE);
-//                monthImg.setVisibility(View.INVISIBLE);
-//                mWindow.dismiss();
-//                mWindow = null;
-//                RxBus.getDefault().post(RxEventCodeType.CONTACT_REFRESH,dataList.get(position).toString());
-//            }
-//        });
-//    }
     private void initPopupWindow(TextView parentView, int widthOff, int heightOff, List<String> dataList, int tag) {
         View contentView = LayoutInflater.from(this).inflate(R.layout.contact_popupwindow, null, false);
         mWindow = new PopupWindow(contentView, tvWidth - 15, LayoutParams.WRAP_CONTENT, true);

@@ -16,7 +16,7 @@ public class ContactParty implements Serializable {
      */
 
     private String msg;
-    private String code;
+    private int code;
     private DataBean data;
 
     public String getMsg() {
@@ -27,11 +27,11 @@ public class ContactParty implements Serializable {
         this.msg = msg;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

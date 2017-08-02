@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import okhttp3.Call;
 
 /**
@@ -43,38 +43,48 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
     private MyRecyclerViewAdapter adapter;
     private String yearString = "";
     private String monthString = "";
-
+    Disposable dis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_contact_party);
         SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
-        initData(yearString, monthString);
+
         initTitleBar();
+        initData(yearString, monthString);
 //        RxBus.getDefault().register(this);
         RxBus.getDefault().toObservable(RxEventCodeType.CONTACT_REFRESH, String.class)
-                .subscribe(new Consumer<String>() {
+                .subscribe(new Observer<String>() {
                     @Override
-                    public void accept(@NonNull String s) throws Exception {
+                    public void onSubscribe(Disposable d) {
+                        dis = d;
+                    }
+
+                    @Override
+                    public void onNext(String s) {
                         filterRefresh(s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
 
     @Override
     protected void onDestroy() {
-//        RxBus.getDefault().unRegister(this);
-//        SPUtil.getInstance(this).saveInfo("searchYear", "");
-//        SPUtil.getInstance(this).saveInfo("searchMonth", "");
-//        Log.e("msg",yearString +"结束" +monthString);
-        Log.e("msg","onDestroy");
+        if (!dis.isDisposed()) dis.dispose();
         super.onDestroy();
     }
 
 
-    //    @Subscribe(code = RxEventCodeType.CONTACT_REFRESH)
     public void filterRefresh(String s) {
-        Log.e("msg", "" + s);
         int length = s.split("_").length;
         String year = s.split("_")[0];
         String month = "";
@@ -108,37 +118,27 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
 
     @Override
     protected void onStart() {
-        Log.e("msg","onStart");
         super.onStart();
     }
 
     @Override
     protected void onPause() {
-        Log.e("msg","onPause");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        Log.e("msg","onStop");
         super.onStop();
     }
 
 
     @Override
     protected void onResume() {
-        Log.e("msg","onResume");
         super.onResume();
     }
 
     private void initData(String year, String month) {
-        Log.e("msg", year + "传入" + month);
         partyList.clear();
-//        if(year == null){
-//            year = "";
-//        }if(month == null){
-//            month = "";
-//        }
         String url = UrlConf.PeopleContact;
         WNetUtil.StringCallBack(OkHttpUtils.post().url(url)
                         .addParams("token", App.token)
@@ -154,11 +154,10 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
                         } catch (JsonSyntaxException e) {
                             e.printStackTrace();
                         }
-                        if (contactParty.getCode().equals("100")) {
+                        if (contactParty.getCode() == 100) {
                             partyList.addAll(contactParty.getData().getContactList());
                             adapter.notifyDataSetChanged();
                         }
-                        Log.e("msg", response + "联系表");
                     }
 
                     @Override
@@ -180,10 +179,19 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
                 holder.setText(R.id.list_month, partyList.get(position).getTime());
                 holder.setText(R.id.list_persion, "联系对象：" + partyList.get(position).getTarget());
                 holder.setText(R.id.list_action, "互相帮助措施记录:" + partyList.get(position).getHelpRecord());
+                if(position % 4 == 0){
+                    holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_blue);
+                }else if(position % 4 == 1){
+                    holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_green);
+                }else if(position % 4 == 2){
+                    holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_qin);
+                }else if(position % 4 == 3){
+                    holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_yellow);
+                }
             }
         };
         bindingView.contactList.setAdapter(adapter);
-        if (partyList.size() > 0) {
+//        if (partyList.size() > 0) {
             adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, int position) {
@@ -199,7 +207,7 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
                     return false;
                 }
             });
-        }
+//        }
     }
 
     View.OnClickListener clickListener = v -> {

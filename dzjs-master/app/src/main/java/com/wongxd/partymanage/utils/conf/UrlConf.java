@@ -10,6 +10,7 @@ public class UrlConf {
 
     public static String HOST = "http://192.168.100.220:8080/";
 
+    public static String MQTTHOST = "tcp://192.168.181.152:61613";
 
     public static String LoginUrl = HOST + "userLogin";//登录
 

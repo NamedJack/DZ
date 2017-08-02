@@ -91,10 +91,17 @@ public class DoBetterAty extends BaseBindingActivity<AtyDoBetterListBinding> {
                 holder.setText(R.id.person_honer_time, honerBeanList.get(position).getTime().split(" ")[0]);
                 holder.setText(R.id.personal_honer_text, honerBeanList.get(position).getTypeName());
 
-//                holder.setBackgroundRes(R.id.personal_honer_img,
-//                        Glide.with(iv.getContext()).load(UrlConf.HOST + honerBeanList.get(position).getImg()).centerCrop().into(iv));
+                if(position % 4 == 0){
+                    holder.setBackgroundRes(R.id.better_base_ll_bg, R.drawable.person_honer_bg_qin);
+                }else if(position % 4 == 1){
+                    holder.setBackgroundRes(R.id.better_base_ll_bg, R.drawable.person_honer_bg_blue);
+                }else if(position % 4 == 2){
+                    holder.setBackgroundRes(R.id.better_base_ll_bg, R.drawable.person_honer_bg_red);
+                }else if(position % 4 == 3){
+                    holder.setBackgroundRes(R.id.better_base_ll_bg, R.drawable.person_honer_bg_yellow);
+                }
                 RectImageView iv = holder.getView(R.id.personal_honer_img);
-                Glide.with(iv.getContext()).load(UrlConf.HOST + honerBeanList.get(position).getImg()).centerCrop().into(iv);
+                Glide.with(iv.getContext()).load(UrlConf.HOST + honerBeanList.get(position).getImg()).centerCrop().placeholder(R.drawable.placeholder).into(iv);
             }
 
         };

@@ -58,15 +58,6 @@ public class ContactDetailAty extends BaseBindingActivity<AtyContactDetailBindin
                             bindingView.contactHelpWriteDown.setText(detailBean.getData().getHelpRecord());
                             bindingView.contactHelpDo.setText(detailBean.getData().getImplement());
                         }
-//                        Log.e("msg", "联系表详情" + response);
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        String implement = jsonObject.getString("implement");
-//
-//                        if(contactParty.getCode().equals("100")){
-//                            partyList.addAll(contactParty.getData().getContactList());
-//                            adapter.notifyDataSetChanged();
-//                        }
-//                        Log.e("msg", response + "联系表" );
                     }
 
                     @Override

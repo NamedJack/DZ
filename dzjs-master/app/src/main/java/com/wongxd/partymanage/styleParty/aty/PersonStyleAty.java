@@ -35,7 +35,7 @@ public class PersonStyleAty extends BaseBindingActivity<AtyStylePersonBinding> {
         bindingView.personDescribe.setText(mienListBean.getDescribe());
         bindingView.stylePersonName.setText(mienListBean.getUserName());
         RectImageView iv = (RectImageView) findViewById(R.id.person_photo);
-        Glide.with(iv.getContext()).load(UrlConf.HOST + mienListBean.getImg()).centerCrop().into(iv);
+        Glide.with(iv.getContext()).load(UrlConf.HOST + mienListBean.getImg()).placeholder(R.drawable.placeholder).into(iv);
     }
 
     View.OnClickListener onClickListener = v -> {

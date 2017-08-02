@@ -56,10 +56,10 @@ public class StyleOfPartyAty extends BaseBindingActivity<AtyStylePartyBinding> {
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, R.layout.item_of_style_party,partyList) {
             @Override
             public void convert(MyViewHolder holder, int position) {
-                holder.setText(R.id.party_style_name, partyList.get(position).getUserName());
+                holder.setText(R.id.party_style_name, "姓 名 ：" + partyList.get(position).getUserName());
                 holder.setText(R.id.party_style_story, partyList.get(position).getDescribe());
                 RectImageView iv = holder.getView(R.id.party_style_img);
-                Glide.with(iv.getContext()).load(UrlConf.HOST + partyList.get(position).getImg()).centerCrop().into(iv);
+                Glide.with(iv.getContext()).load(UrlConf.HOST + partyList.get(position).getImg()).placeholder(R.drawable.placeholder).into(iv);
 //                holder.setBackgroundRes();
             }
         };

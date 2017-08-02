@@ -46,6 +46,10 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
     }
 
     private void initView() {
+        Calendar now = Calendar.getInstance();
+        mYear = now.get(Calendar.YEAR);
+        mMonth = now.get(Calendar.MONTH);
+        mDay = now.get(Calendar.DAY_OF_MONTH);
         bindingView.addContactDays.setOnClickListener(clickListener);
         bindingView.addContactLeftIcon.setOnClickListener(clickListener);
         bindingView.addContactCommit.setOnClickListener(clickListener);
@@ -94,7 +98,6 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
                 , url, AddContactPersonAty.this, "数据获取中", true, new WNetUtil.WNetStringCallback() {
                     @Override
                     public void success(String response, int id) {
-                        Log.e("msg", "新增联系表" + response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
@@ -106,17 +109,6 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-//                        ContactParty contactParty = null;
-//                        try {
-//                            contactParty = new Gson().fromJson(response, ContactParty.class);
-//                        } catch (JsonSyntaxException e) {
-//                            e.printStackTrace();
-//                        }
-//                        if(contactParty.getCode().equals("100")){
-//                            partyList.addAll(contactParty.getData().getContactList());
-//                            adapter.notifyDataSetChanged();
-//                        }
-//                        Log.e("msg", response + "提交联系表" );
                     }
 
                     @Override
@@ -128,16 +120,8 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
     }
 
     private void showDayChoose() {
-        Calendar now = Calendar.getInstance();
-        mYear = now.get(Calendar.YEAR);
-        mMonth = now.get(Calendar.MONTH);
-        mDay = now.get(Calendar.DAY_OF_MONTH);
-
         DatePickerDialog dialog = DatePickerDialog.newInstance(
-                this,
-                now.get(Calendar.YEAR),
-                now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH)
+                this, mYear, mMonth, mDay
         );
         dialog.show(getFragmentManager(), "Datepickerdialog");
     }
@@ -145,7 +129,10 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        bindingView.addContactDays.setText(mYear+ "-" + ++mMonth  + "-" + mDay);
+        mYear = year;
+        mDay = dayOfMonth;
+        mMonth = monthOfYear;
+        bindingView.addContactDays.setText(mYear + "-" + ++mMonth + "-" + mDay);
         contactTime = mYear+ "-" + ++mMonth  + "-" + mDay;
     }
 

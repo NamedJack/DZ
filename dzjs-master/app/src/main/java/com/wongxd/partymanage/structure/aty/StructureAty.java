@@ -22,6 +22,7 @@ import okhttp3.Call;
 
 /**
  * Created by zyj on 2017/8/1.
+ * 组织架构图
  */
 
 public class StructureAty extends BaseBindingActivity<AtyStructureBinding>{
@@ -67,7 +68,7 @@ public class StructureAty extends BaseBindingActivity<AtyStructureBinding>{
 
     private void setImg() {
         ImageView iv = (ImageView) findViewById(R.id.structure_img);
-        Glide.with(this).load(UrlConf.HOST + imgStr).into(iv);
+        Glide.with(this).load(UrlConf.HOST + imgStr).placeholder(R.drawable.placeholder).into(iv);
 //                Glide.with(iv.getContext()).load(UrlConf.HOST + bean.getIcon()).centerCrop().into(iv);
 //                Glide.with(iv.getContext()).load(R.drawable.icon_more).centerCrop().into(iv);
     }

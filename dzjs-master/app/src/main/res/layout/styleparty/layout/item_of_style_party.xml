@@ -26,16 +26,16 @@
             android:id="@+id/party_style_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="aaaaaa"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
+            android:ellipsize="end"
+            android:maxLines="5"
             android:id="@+id/party_style_story"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="aaaaaa"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <com.wongxd.partymanage.styleParty.view.RectImageView
@@ -44,7 +44,6 @@
         android:layout_height="100dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/test_rect_image"
         sw:type="round">
 
     </com.wongxd.partymanage.styleParty.view.RectImageView>

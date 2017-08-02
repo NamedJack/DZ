@@ -91,7 +91,6 @@ public class PartyVoteAty extends BaseBindingActivity<AtyVoteOfPartyBinding> {
         }
 
         spareTime = endtTime.getTime() - startTime.getTime();
-        Log.e("msg", "spareTime" + spareTime);
         bindingView.voteSpareTime.start(spareTime);
         bindingView.partyVoteLeftIcon.setOnClickListener(onClickListener);
 //        bindingView.voteImg.setImageResource();

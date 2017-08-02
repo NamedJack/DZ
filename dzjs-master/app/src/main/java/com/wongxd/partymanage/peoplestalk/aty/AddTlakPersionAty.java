@@ -125,7 +125,6 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
                 tlakPersion = bindingView.addPersionName.getText().toString();
                 tlakAdvice = bindingView.addPersionAdvice.getText().toString();
                 tlakSelf = bindingView.addPersionSlef.getText().toString();
-                Log.e("msg","time" + tlakTime);
                 if (tlakTime == null ||tlakPersion.equals("") || tlakAdvice.equals("") || tlakSelf.equals("") ) {
                     TU.cT("请填写完整信息");
                 } else {

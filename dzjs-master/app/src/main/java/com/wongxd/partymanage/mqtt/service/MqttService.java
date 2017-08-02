@@ -15,6 +15,7 @@ import com.wongxd.partymanage.App;
 import com.wongxd.partymanage.AtyMainActivity;
 import com.wongxd.partymanage.mqtt.Notification.MyNotification;
 import com.wongxd.partymanage.mqtt.bean.PushMessage;
+import com.wongxd.partymanage.utils.conf.UrlConf;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -40,7 +41,8 @@ public class MqttService extends Service {
     private String clintID = "dz" + preferences.getString("account",null) + Math.random()*100;
     private static final int QOS = 2;
     boolean retained = false;
-    String host = "tcp://192.168.181.152:61613";
+//    String host = "tcp://192.168.181.152:61613";
+    String host = UrlConf.MQTTHOST;
     String mqttUserName = "admin";
     String mqttUserPwd = "password";
     String myTopic = "toclient/"+1;//

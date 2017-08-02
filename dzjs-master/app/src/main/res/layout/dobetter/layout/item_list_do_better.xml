@@ -9,7 +9,7 @@
         android:id="@+id/better_base_ll_bg"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@drawable/person_honer_bg"
+        android:background="@drawable/person_honer_bg_qin"
         android:orientation="horizontal"
         android:padding="15dp">
 

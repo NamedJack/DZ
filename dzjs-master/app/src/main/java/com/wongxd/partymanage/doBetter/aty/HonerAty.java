@@ -60,7 +60,7 @@ public class HonerAty extends BaseBindingActivity<AtyHonerBinding> {
                             String img = jsonObject.getString("url");
                             Log.e("msg", code + "创优详情" + img);
                             ImageView iv = (ImageView) findViewById(R.id.team_honer_img);
-                            Glide.with(iv.getContext()).load(UrlConf.HOST + img).centerCrop().into(iv);
+                            Glide.with(iv.getContext()).load(UrlConf.HOST + img).placeholder(R.drawable.placeholder).into(iv);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
