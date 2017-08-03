@@ -18,12 +18,14 @@ import com.google.gson.JsonSyntaxException;
 import com.wongxd.partymanage.App;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
+import com.wongxd.partymanage.base.RecyclerAdapter.EndLessOnScrollListener;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyRecyclerViewAdapter;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyDoBetterListBinding;
 import com.wongxd.partymanage.doBetter.bean.HonerBean;
 import com.wongxd.partymanage.styleParty.view.RectImageView;
 import com.wongxd.partymanage.utils.SystemBarHelper;
+import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -41,23 +43,32 @@ public class DoBetterAty extends BaseBindingActivity<AtyDoBetterListBinding> {
 
     private MyRecyclerViewAdapter adapter;
     private List<HonerBean.DataBean.GoodListBean> honerBeanList = new ArrayList<>();
-
+    private LinearLayoutManager linearLayoutManager;
+    private boolean isLoadMore = false;
+    private int currentPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_do_better_list);
         SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initView();
-        initData();
+
     }
 
-    private void initData() {
+    @Override
+    protected void onResume() {
+        super.onResume();
         honerBeanList.clear();
+        initData(1);
+    }
+
+    private void initData(int pageNo) {
+//        honerBeanList.clear();
         String url = UrlConf.DoBetter;
         WNetUtil.StringCallBack(OkHttpUtils.post().url(url)
                         .addParams("token", App.token)
                         .addParams("name", bindingView.doBetterSearch.getText().toString() + "")
-
+                        .addParams("pageNo", pageNo + "")
                 , url, DoBetterAty.this, "数据获取中", true, new WNetUtil.WNetStringCallback() {
                     @Override
                     public void success(String response, int id) {
@@ -68,6 +79,12 @@ public class DoBetterAty extends BaseBindingActivity<AtyDoBetterListBinding> {
                             e.printStackTrace();
                         }
                         if(honerBean.getCode().equals("100")){
+                            if (honerBean.getData().getPage().getTotalPage() > honerBean.getData().getPage().getPageNo()) {
+                                currentPage = honerBean.getData().getPage().getPageNo();
+                                isLoadMore = true;
+                            } else {
+                                isLoadMore = false;
+                            }
                             honerBeanList.addAll(honerBean.getData().getGoodList());
                         }
                         adapter.notifyDataSetChanged();
@@ -83,6 +100,7 @@ public class DoBetterAty extends BaseBindingActivity<AtyDoBetterListBinding> {
     }
 
     private void initView() {
+        linearLayoutManager = new LinearLayoutManager(this);
         bindingView.doBetterLeftIcon.setOnClickListener(clickListener);
         adapter = new MyRecyclerViewAdapter(this, R.layout.item_list_do_better, honerBeanList) {
             @Override
@@ -106,7 +124,7 @@ public class DoBetterAty extends BaseBindingActivity<AtyDoBetterListBinding> {
 
         };
         bindingView.doBetterSearch.setOnEditorActionListener(editorActionListener);
-        bindingView.doBetterRl.setLayoutManager(new LinearLayoutManager(this));
+        bindingView.doBetterRl.setLayoutManager(linearLayoutManager);
         bindingView.doBetterRl.setAdapter(adapter);
         adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -123,6 +141,23 @@ public class DoBetterAty extends BaseBindingActivity<AtyDoBetterListBinding> {
                 return false;
             }
         });
+        bindingView.doBetterRl.addOnScrollListener(new EndLessOnScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore() {
+                loadMoreDate();
+            }
+        });
+    }
+
+    /**
+     * 滑动到底部加载更多数据
+     */
+    private void loadMoreDate() {
+        if (isLoadMore) {
+            initData( ++currentPage);
+        }else {
+            TU.cT("没有更多数据啦");
+        }
     }
 
 
@@ -144,8 +179,8 @@ public class DoBetterAty extends BaseBindingActivity<AtyDoBetterListBinding> {
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if ((actionId == 0 || actionId == 3) && event != null) {
                 //点击搜索要做的操作
-//                dataBeenList.clear();
-                initData();
+                honerBeanList.clear();
+                initData(1);
                 ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
                         .hideSoftInputFromWindow(DoBetterAty.this.getCurrentFocus()
                                 .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

@@ -137,10 +137,28 @@ public class AddTlakPersionAty extends BaseBindingActivity<AtyAddTlakpersionBind
         }
     };
 
-
+    /**
+     * 要求上传时间格式为 xxxx - xx -xx
+     * 本地获取月份为 0 - 11 要求上传月份为 01 - 12 月
+     * @param mYear
+     * @param mMonth
+     * @param mDay
+     */
     private void setTime(int mYear, int mMonth, int mDay) {
+        String m= "";String d ="";
+        if(++mMonth < 10){
+            m = "0" + mMonth;
+        }else {
+            m  = "" + mMonth;
+        }
+        if(mDay < 10){
+            d = "0" + mDay;
+        }else {
+            d = mDay +"";
+        }
         tlakTime = mYear + "-" + mMonth + "-" + mDay;
-        bindingView.addTalkDays.setText(mYear + "-" + ++mMonth + "-" + mDay);
+//        Log.e("msg", "tlakTime"+tlakTime);
+        bindingView.addTalkDays.setText(mYear + "-" + m + "-" + d);
     }
 
     AdapterView.OnItemSelectedListener itemClickListener = new AdapterView.OnItemSelectedListener() {

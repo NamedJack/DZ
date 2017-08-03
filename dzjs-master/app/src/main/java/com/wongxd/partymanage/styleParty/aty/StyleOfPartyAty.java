@@ -18,12 +18,14 @@ import com.google.gson.JsonSyntaxException;
 import com.wongxd.partymanage.App;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
+import com.wongxd.partymanage.base.RecyclerAdapter.EndLessOnScrollListener;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyRecyclerViewAdapter;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyStylePartyBinding;
 import com.wongxd.partymanage.styleParty.bean.StyleParty;
 import com.wongxd.partymanage.styleParty.view.RectImageView;
 import com.wongxd.partymanage.utils.SystemBarHelper;
+import com.wongxd.partymanage.utils.TU;
 import com.wongxd.partymanage.utils.conf.UrlConf;
 import com.wongxd.partymanage.utils.net.WNetUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -38,22 +40,27 @@ import okhttp3.Call;
  */
 
 public class StyleOfPartyAty extends BaseBindingActivity<AtyStylePartyBinding> {
-    private List<StyleParty.DataBean.MienListBean> partyList  = new ArrayList<>();
+    private List<StyleParty.DataBean.MienListBean> partyList = new ArrayList<>();
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
+    private LinearLayoutManager linearLayoutManager;
+    private boolean isLoadMore = false;
+    private int currentPage = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_style_party);
         SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
         initView();
-        initData();
+        initData(1);
     }
 
     private void initView() {
+        linearLayoutManager = new LinearLayoutManager(this);
         bindingView.styleLeftIcon.setOnClickListener(onClickListener);
         bindingView.stylePartySearch.setOnEditorActionListener(editorActionListener);
-        bindingView.styleRl.setLayoutManager(new LinearLayoutManager(this));
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, R.layout.item_of_style_party,partyList) {
+        bindingView.styleRl.setLayoutManager(linearLayoutManager);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, R.layout.item_of_style_party, partyList) {
             @Override
             public void convert(MyViewHolder holder, int position) {
                 holder.setText(R.id.party_style_name, "姓 名 ：" + partyList.get(position).getUserName());
@@ -69,7 +76,7 @@ public class StyleOfPartyAty extends BaseBindingActivity<AtyStylePartyBinding> {
             public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, int position) {
                 Intent intent = new Intent(StyleOfPartyAty.this, PersonStyleAty.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("whichPerson",partyList.get(position));
+                bundle.putSerializable("whichPerson", partyList.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -81,10 +88,24 @@ public class StyleOfPartyAty extends BaseBindingActivity<AtyStylePartyBinding> {
 
 
         });
+        bindingView.styleRl.addOnScrollListener(new EndLessOnScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore() {
+                loadMoreDate();
+            }
+        });
+    }
+
+    private void loadMoreDate() {
+        if (isLoadMore) {
+            initData(++currentPage);
+        } else {
+            TU.cT("没有更多数据啦");
+        }
     }
 
     View.OnClickListener onClickListener = v -> {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.style_left_icon:
                 StyleOfPartyAty.this.finish();
                 break;
@@ -92,12 +113,12 @@ public class StyleOfPartyAty extends BaseBindingActivity<AtyStylePartyBinding> {
     };
 
 
-    private void initData() {
-        partyList.clear();
+    private void initData(int pageNo) {
         String url = UrlConf.StyleParty;
         WNetUtil.StringCallBack(OkHttpUtils.post().url(url)
                         .addParams("token", App.token)
                         .addParams("name", bindingView.stylePartySearch.getText().toString() + "")
+                        .addParams("pageNo", pageNo + "")
                 , url, StyleOfPartyAty.this, "数据获取中", true, new WNetUtil.WNetStringCallback() {
                     @Override
                     public void success(String response, int id) {
@@ -106,10 +127,16 @@ public class StyleOfPartyAty extends BaseBindingActivity<AtyStylePartyBinding> {
                         try {
                             listBean = new Gson().fromJson(response, StyleParty.class);
                         } catch (JsonSyntaxException e) {
-                            Log.e("msg","解析出错" + e.toString() );
+                            Log.e("msg", "解析出错" + e.toString());
                             e.printStackTrace();
                         }
-                        if(listBean.getCode().equals("100")){
+                        if (listBean.getCode().equals("100")) {
+                            if (listBean.getData().getPage().getTotalPage() > listBean.getData().getPage().getPageNo()) {
+                                currentPage = listBean.getData().getPage().getPageNo();
+                                isLoadMore = true;
+                            } else {
+                                isLoadMore = false;
+                            }
                             partyList.addAll(listBean.getData().getMienList());
                             myRecyclerViewAdapter.notifyDataSetChanged();
                         }
@@ -123,16 +150,16 @@ public class StyleOfPartyAty extends BaseBindingActivity<AtyStylePartyBinding> {
                 });
 
 
-
     }
+
     TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if ((actionId == 0 || actionId == 3) && event != null) {
                 //点击搜索要做的操作
-//                dataBeenList.clear();
-                initData();
-                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+                 partyList.clear();
+                initData(1);
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                         .hideSoftInputFromWindow(StyleOfPartyAty.this.getCurrentFocus()
                                 .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 

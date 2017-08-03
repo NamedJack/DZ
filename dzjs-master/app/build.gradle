@@ -87,6 +87,8 @@ android {
             exclude group: 'io.reactivex'
         }
 
+//        compile 'com.zhy:base-rvadapter:3.0.3'
+
 //    #######################################################################
         compile 'com.zhy:okhttputils:2.6.2'
         //    compile 'com.squareup.retrofit2:retrofit:2.2.0'

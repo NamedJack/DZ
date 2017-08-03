@@ -13,6 +13,7 @@ import com.google.gson.JsonSyntaxException;
 import com.wongxd.partymanage.App;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
+import com.wongxd.partymanage.base.RecyclerAdapter.EndLessOnScrollListener;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyRecyclerViewAdapter;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.base.rx.RxBus;
@@ -44,6 +45,10 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
     private String yearString = "";
     private String monthString = "";
     Disposable dis;
+    private LinearLayoutManager linearLayoutManager;
+    private boolean isLoadMore = false;
+    private int currentPage = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +56,7 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
         SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
 
         initTitleBar();
-        initData(yearString, monthString);
+
 //        RxBus.getDefault().register(this);
         RxBus.getDefault().toObservable(RxEventCodeType.CONTACT_REFRESH, String.class)
                 .subscribe(new Observer<String>() {
@@ -78,6 +83,12 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initData(yearString, monthString, 1);
+    }
+
+    @Override
     protected void onDestroy() {
         if (!dis.isDisposed()) dis.dispose();
         super.onDestroy();
@@ -89,62 +100,45 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
         String year = s.split("_")[0];
         String month = "";
         if (!year.equals("")) {
+            partyList.clear();
             yearString = getNumberFormString(year);
-            initData(yearString, "");
-            TU.cT(yearString);
+            initData(yearString, "", 1);
         }
         if (length > 1) {
             month = s.split("_")[1];
             if (!yearString.equals("") && month.equals("第一季度")) {
-                initData(yearString, "1");
-                TU.cT(yearString + month);
+                partyList.clear();
+                monthString = "1";
+                initData(yearString, monthString, 1);
             } else if (!yearString.equals("") && month.equals("第二季度")) {
-                TU.cT(yearString + month);
-                initData(yearString, "2");
+                partyList.clear();
+                monthString = "2";
+                initData(yearString, monthString, 1);
             } else if (!yearString.equals("") && month.equals("第三季度")) {
-                TU.cT(yearString + month);
-                initData(yearString, "3");
+                partyList.clear();
+                monthString = "3";
+                initData(yearString, monthString, 1);
             } else if (!yearString.equals("") && month.equals("第四季度")) {
-                TU.cT(yearString + month);
-                initData(yearString, "4");
+                partyList.clear();
+                monthString = "4";
+                initData(yearString, monthString, 1);
             } else if (!yearString.equals("") && month.equals("所有季度")) {
-                TU.cT(yearString + month);
-                initData(yearString, "");
+                partyList.clear();
+                initData(yearString, "", 1);
             }
         }
 
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    private void initData(String year, String month) {
-        partyList.clear();
+    private void initData(String year, String month, int pageNo) {
+//        partyList.clear();
         String url = UrlConf.PeopleContact;
         WNetUtil.StringCallBack(OkHttpUtils.post().url(url)
                         .addParams("token", App.token)
                         .addParams("year", year)
                         .addParams("quarter", month)
-                        .addParams("pageSize", "10")
+                        .addParams("pageNo", pageNo + "")
                 , url, ContactOfPartyAty.this, "数据获取中", false, new WNetUtil.WNetStringCallback() {
                     @Override
                     public void success(String response, int id) {
@@ -155,6 +149,13 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
                             e.printStackTrace();
                         }
                         if (contactParty.getCode() == 100) {
+                            if (contactParty.getData().getPage().getTotalPage() > contactParty.getData().getPage().getPageNo()) {
+                                currentPage = contactParty.getData().getPage().getPageNo();
+                                isLoadMore = true;
+                            } else {
+                                isLoadMore = false;
+                            }
+
                             partyList.addAll(contactParty.getData().getContactList());
                             adapter.notifyDataSetChanged();
                         }
@@ -169,45 +170,58 @@ public class ContactOfPartyAty extends BaseBindingActivity<AtyContactPartyBindin
     }
 
     private void initTitleBar() {
+        linearLayoutManager = new LinearLayoutManager(this);
         bindingView.contactTitle.setText("党员群众联系表");
         bindingView.contactLeftIcon.setOnClickListener(clickListener);
         bindingView.contactRightIcon.setOnClickListener(clickListener);
-        bindingView.contactList.setLayoutManager(new LinearLayoutManager(this));
+        bindingView.contactList.setLayoutManager(linearLayoutManager);
         adapter = new MyRecyclerViewAdapter(this, R.layout.item_contact_party, partyList) {
             @Override
             public void convert(MyViewHolder holder, int position) {
                 holder.setText(R.id.list_month, partyList.get(position).getTime());
                 holder.setText(R.id.list_persion, "联系对象：" + partyList.get(position).getTarget());
                 holder.setText(R.id.list_action, "互相帮助措施记录:" + partyList.get(position).getHelpRecord());
-                if(position % 4 == 0){
+                if (position % 4 == 0) {
                     holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_blue);
-                }else if(position % 4 == 1){
+                } else if (position % 4 == 1) {
                     holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_green);
-                }else if(position % 4 == 2){
+                } else if (position % 4 == 2) {
                     holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_qin);
-                }else if(position % 4 == 3){
+                } else if (position % 4 == 3) {
                     holder.setBackgroundRes(R.id.list_month, R.drawable.icon_contact_yellow);
                 }
             }
         };
         bindingView.contactList.setAdapter(adapter);
-//        if (partyList.size() > 0) {
-            adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, int position) {
-                    Intent intent = new Intent(ContactOfPartyAty.this, ContactDetailAty.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("contactParty", partyList.get(position));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
+        adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, int position) {
+                Intent intent = new Intent(ContactOfPartyAty.this, ContactDetailAty.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("contactParty", partyList.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
 
-                @Override
-                public boolean onItemLonClick(View view, RecyclerView.ViewHolder viewHolder, int position) {
-                    return false;
-                }
-            });
-//        }
+            @Override
+            public boolean onItemLonClick(View view, RecyclerView.ViewHolder viewHolder, int position) {
+                return false;
+            }
+        });
+        bindingView.contactList.addOnScrollListener(new EndLessOnScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore() {
+                loadMoreDate();
+            }
+        });
+    }
+
+    private void loadMoreDate() {
+        if (isLoadMore) {
+            initData(yearString, monthString, ++currentPage);
+        } else {
+            TU.cT("没有更多数据啦");
+        }
     }
 
     View.OnClickListener clickListener = v -> {

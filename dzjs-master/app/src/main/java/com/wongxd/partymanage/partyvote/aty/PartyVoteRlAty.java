@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.wongxd.partymanage.App;
 import com.wongxd.partymanage.R;
 import com.wongxd.partymanage.base.BaseBindingActivity;
+import com.wongxd.partymanage.base.RecyclerAdapter.EndLessOnScrollListener;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyRecyclerViewAdapter;
 import com.wongxd.partymanage.base.RecyclerAdapter.MyViewHolder;
 import com.wongxd.partymanage.databinding.AtyVoteListBinding;
@@ -35,19 +36,23 @@ import okhttp3.Call;
 public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
     private List<VoteListBean.DataBean> list = new ArrayList<>();
     private MyRecyclerViewAdapter myRecyclerViewAdapter ;
+    private LinearLayoutManager linearLayoutManager;
+    private boolean isLoadMore = false;
+    private int currentPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_vote_list);
         SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
-        initData();
+        initData(1);
         initView();
     }
 
-    private void initData() {
+    private void initData(int pageNo) {
         String url = UrlConf.PartyVoteTicket;
         WNetUtil.StringCallBack(OkHttpUtils.post().url(url)
                         .addParams("token", App.token)
+                        .addParams("pageNo", pageNo + "")
                 , url, PartyVoteRlAty.this, "数据获取中", true, new WNetUtil.WNetStringCallback() {
                     @Override
                     public void success(String response, int id) {
@@ -55,6 +60,12 @@ public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
                         VoteListBean voteListBean = new Gson().fromJson(response, VoteListBean.class);
                         if (voteListBean.getCode().equals(100+"")) {
 //                            Log.e("msg",voteListBean.getData().size() + "aa");
+                            if (voteListBean.getTotalPage() > voteListBean.getPageNo()) {
+                                currentPage = voteListBean.getPageNo();
+                                isLoadMore = true;
+                            } else {
+                                isLoadMore = false;
+                            }
                             if(voteListBean.getData().size() == 0){
                                 TU.cT("暂无投票数据");
                             }else {
@@ -73,6 +84,7 @@ public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
     }
 
     private void initView() {
+        linearLayoutManager = new LinearLayoutManager(this);
         bindingView.voteListLeftIcon.setOnClickListener(v -> {
             PartyVoteRlAty.this.finish();
         });
@@ -90,7 +102,7 @@ public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
             }
 
         };
-        bindingView.voteListRl.setLayoutManager(new LinearLayoutManager(this));
+        bindingView.voteListRl.setLayoutManager(linearLayoutManager);
         bindingView.voteListRl.setAdapter(myRecyclerViewAdapter);
         bindingView.voteListRl.addItemDecoration(new RecyclerViewDivider(
                 this, LinearLayoutManager.HORIZONTAL, 1, ContextCompat.getColor(this, R.color.lightgray)));
@@ -109,5 +121,19 @@ public class PartyVoteRlAty extends BaseBindingActivity<AtyVoteListBinding>{
                 return false;
             }
         });
+        bindingView.voteListRl.addOnScrollListener(new EndLessOnScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore() {
+                loadMoreData();
+            }
+        });
+    }
+
+    private void loadMoreData() {
+        if (isLoadMore) {
+            initData( ++currentPage);
+        }else {
+            TU.cT("没有更多数据啦");
+        }
     }
 }

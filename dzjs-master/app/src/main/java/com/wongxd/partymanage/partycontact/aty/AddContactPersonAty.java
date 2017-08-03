@@ -37,26 +37,31 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
     private String contactAction;
     private String contactNotes;
     private ContactParty contactParty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_add_contact_party);
         SystemBarHelper.tintStatusBar(this, ContextCompat.getColor(getApplicationContext(), R.color.app_red), 0f);
+        initTime();
         initView();
     }
 
-    private void initView() {
+    private void initTime() {
         Calendar now = Calendar.getInstance();
         mYear = now.get(Calendar.YEAR);
         mMonth = now.get(Calendar.MONTH);
         mDay = now.get(Calendar.DAY_OF_MONTH);
         bindingView.addContactDays.setOnClickListener(clickListener);
+    }
+
+    private void initView() {
         bindingView.addContactLeftIcon.setOnClickListener(clickListener);
         bindingView.addContactCommit.setOnClickListener(clickListener);
     }
 
     View.OnClickListener clickListener = v -> {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.add_contact_days:
                 showDayChoose();
                 break;
@@ -76,10 +81,10 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
         contactNotes = bindingView.addContactNotes.getText().toString();
         contactAction = bindingView.addContactAction.getText().toString();
 //        contactParty = new ContactParty(contactName, contactTime, contactNotes, contactAction);
-        if( contactTime == null || TextUtils.isEmpty(contactName)
-                || TextUtils.isEmpty(contactNotes) || TextUtils.isEmpty(contactAction) ){
+        if (contactTime == null || TextUtils.isEmpty(contactName)
+                || TextUtils.isEmpty(contactNotes) || TextUtils.isEmpty(contactAction)) {
             TU.cT("请填写完成信息");
-        }else{
+        } else {
             commitInfo(contactTime, contactName, contactNotes, contactAction);
             AddContactPersonAty.this.finish();
         }
@@ -101,9 +106,9 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
-                            if(code.equals("100")){
+                            if (code.equals("100")) {
                                 TU.cT("添加成功");
-                            }else{
+                            } else {
                                 TU.cT("添加失败");
                             }
                         } catch (JSONException e) {
@@ -132,9 +137,32 @@ public class AddContactPersonAty extends BaseBindingActivity<AtyAddContactPartyB
         mYear = year;
         mDay = dayOfMonth;
         mMonth = monthOfYear;
-        bindingView.addContactDays.setText(mYear + "-" + ++mMonth + "-" + mDay);
-        contactTime = mYear+ "-" + ++mMonth  + "-" + mDay;
+        setTime(mYear, mMonth, mDay);
     }
 
+    /**
+     * 要求上传时间格式为 xxxx - xx -xx
+     * 本地获取月份为 0 - 11 要求上传月份为 01 - 12 月
+     *
+     * @param mYear
+     * @param mMonth
+     * @param mDay
+     */
+    private void setTime(int mYear, int mMonth, int mDay) {
+        String m = "";
+        String d = "";
+        if (++mMonth < 10) {
+            m = "0" + mMonth;
+        } else {
+            m = "" + mMonth;
+        }
+        if (mDay < 10) {
+            d = "0" + mDay;
+        } else {
+            d = mDay + "";
+        }
 
+        bindingView.addContactDays.setText(mYear + "-" + mMonth + "-" + mDay);
+        contactTime = mYear + "-" + m + "-" + d;
+    }
 }

@@ -77,17 +77,17 @@ public class HonerBean implements Serializable {
              * startLoc : 0
              */
 
-            private String pageNo;
+            private int pageNo;
             private String pageSize;
             private String totalNum;
-            private String totalPage;
+            private int totalPage;
             private String startLoc;
 
-            public String getPageNo() {
+            public int getPageNo() {
                 return pageNo;
             }
 
-            public void setPageNo(String pageNo) {
+            public void setPageNo(int pageNo) {
                 this.pageNo = pageNo;
             }
 
@@ -107,11 +107,11 @@ public class HonerBean implements Serializable {
                 this.totalNum = totalNum;
             }
 
-            public String getTotalPage() {
+            public int getTotalPage() {
                 return totalPage;
             }
 
-            public void setTotalPage(String totalPage) {
+            public void setTotalPage(int totalPage) {
                 this.totalPage = totalPage;
             }
 
